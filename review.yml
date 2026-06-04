@@ -1,0 +1,51 @@
+---
+name: California Institute of Technology
+description: California Institute of Technology public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/caltech/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 3
+    summary: >-
+      Caltech has no single unified institution-wide API developer portal, but
+      verifiable public APIs exist in its research-data and astronomy
+      infrastructure. The CaltechDATA InvenioRDM REST API returned live JSON
+      record hits, the OAI-PMH endpoint responded to the Identify verb, and the
+      IRSA (Caltech/IPAC) Virtual Observatory TAP sync endpoint returned HTTP
+      200. The official "caltech" GitHub org is an unofficial community group
+      with one repo; the substantive open-source code lives under caltechlibrary
+      and Caltech-IPAC. The legacy authors.library.caltech.edu repository was
+      gated/unreachable (HTTP 522) at review time and was not cataloged. No
+      endpoints were fabricated; only live-verified properties are listed.
+    endpoints:
+      - url: https://data.caltech.edu/api/records?size=1
+        status: 200
+        note: CaltechDATA InvenioRDM REST API returns JSON record hits.
+      - url: https://data.caltech.edu/oai2d?verb=Identify
+        status: 200
+        note: CaltechDATA OAI-PMH endpoint responds to Identify.
+      - url: https://irsa.ipac.caltech.edu/TAP/sync?QUERY=SELECT+TOP+1+schema_name+FROM+TAP_SCHEMA.schemas&LANG=ADQL&FORMAT=csv
+        status: 200
+        note: IRSA Virtual Observatory TAP sync query returns results.
+      - url: https://irsa.ipac.caltech.edu/voapi.html
+        status: 200
+        note: IRSA VO API documentation index page.
+      - url: https://caltechlibrary.github.io/caltechdata_api/
+        status: 200
+        note: CaltechDATA API Python client documentation.
+      - url: https://github.com/caltechlibrary
+        status: 200
+        note: Caltech Library GitHub org, primary open-source code home.
+      - url: https://github.com/Caltech-IPAC
+        status: 200
+        note: Caltech IPAC Software GitHub org.
+      - url: https://github.com/caltech
+        status: 200
+        note: Unofficial community org (states it is not official; 1 repo).
+      - url: https://www.caltech.edu/
+        status: 200
+        note: Official institution website.
+      - url: https://authors.library.caltech.edu/
+        status: 522
+        note: Legacy authors repository unreachable (Cloudflare timeout) at review time; not cataloged.

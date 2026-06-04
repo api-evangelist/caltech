@@ -1,0 +1,97 @@
+---
+aid: caltech
+name: California Institute of Technology
+description: >-
+  The California Institute of Technology (Caltech) is a private research
+  university in Pasadena, California, ranked #10 in the QS World University
+  Rankings 2025. Caltech's public, machine-readable footprint is concentrated
+  in its research-data and astronomy infrastructure rather than a single
+  central developer portal. CaltechDATA, the institutional research data
+  repository, runs on InvenioRDM and exposes a public REST API and an OAI-PMH
+  interface, with an accompanying open-source Python client. Caltech-operated
+  IPAC runs the NASA/IPAC Infrared Science Archive (IRSA), which publishes
+  Virtual Observatory (IVOA) standard APIs including TAP, Simple Cone Search,
+  and Simple Image Access. There is no single unified institution-wide API
+  developer portal; the official GitHub "caltech" org is an unofficial
+  community group, while caltechlibrary and Caltech-IPAC host the bulk of the
+  open-source code.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/caltech/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Research Data
+  - Astronomy
+  - Open Data
+  - United States
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: caltech:caltechdata-rest
+    name: CaltechDATA REST API
+    description: >-
+      Public REST API for CaltechDATA, the Caltech institutional research data
+      repository built on InvenioRDM. Supports querying and retrieving records,
+      metadata (DataCite 4 JSON), files, and DOIs. Verified live returning JSON
+      record hits.
+    humanURL: https://caltechlibrary.github.io/caltechdata_api/
+    baseURL: https://data.caltech.edu/api/records
+    tags: [ Research Data, Repository, InvenioRDM, DataCite, Open Data ]
+    properties:
+      - type: Documentation
+        url: https://caltechlibrary.github.io/caltechdata_api/
+      - type: GitHub
+        url: https://github.com/caltechlibrary/caltechdata_api
+  - aid: caltech:caltechdata-oai
+    name: CaltechDATA OAI-PMH
+    description: >-
+      OAI-PMH metadata harvesting endpoint for CaltechDATA, enabling
+      programmatic harvesting of repository metadata records. Verified live via
+      the Identify verb.
+    humanURL: https://data.caltech.edu/
+    baseURL: https://data.caltech.edu/oai2d
+    tags: [ Research Data, OAI-PMH, Metadata, Harvesting, Open Data ]
+    properties:
+      - type: Documentation
+        url: https://data.caltech.edu/
+  - aid: caltech:irsa-vo
+    name: IRSA Virtual Observatory APIs (IPAC)
+    description: >-
+      Caltech/IPAC NASA Infrared Science Archive (IRSA) exposes IVOA-standard
+      Virtual Observatory APIs, including Table Access Protocol (TAP), Simple
+      Cone Search (SCS), and Simple Image Access (SIA v2), for programmatic
+      access to NASA infrared and submillimeter mission catalogs and images.
+      TAP sync endpoint verified live.
+    humanURL: https://irsa.ipac.caltech.edu/voapi.html
+    baseURL: https://irsa.ipac.caltech.edu/TAP
+    tags: [ Astronomy, Virtual Observatory, TAP, NASA, Open Data, IPAC ]
+    properties:
+      - type: Documentation
+        url: https://irsa.ipac.caltech.edu/voapi.html
+      - type: Documentation
+        url: https://irsa.ipac.caltech.edu/docs/program_interface/api_catalogs.html
+      - type: GitHub
+        url: https://github.com/Caltech-IPAC
+common:
+  - type: Website
+    url: https://www.caltech.edu/
+  - type: GitHub
+    url: https://github.com/caltechlibrary
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/california-institute-of-technology/
+  - type: Plans
+    url: plans/caltech-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/caltech-rate-limits.yml
+  - type: FinOps
+    url: finops/caltech-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
