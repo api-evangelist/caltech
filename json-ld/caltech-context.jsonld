@@ -1,0 +1,83 @@
+{
+  "@context": {
+    "schema": "https://schema.org/",
+    "caltech": "https://data.caltech.edu/vocab#",
+    "@vocab": "https://schema.org/",
+    "name": "schema:name",
+    "url": "schema:url",
+    "description": "schema:description",
+    "identifier": "schema:identifier",
+    "sameAs": "schema:sameAs",
+    "logo": "schema:logo",
+    "address": "schema:address",
+
+    "CollegeOrUniversity": "schema:CollegeOrUniversity",
+    "Dataset": "schema:Dataset",
+    "DataCatalog": "schema:DataCatalog",
+    "Organization": "schema:Organization",
+
+    "api": "caltech:api",
+    "baseURL": {
+      "@id": "caltech:baseURL",
+      "@type": "@id"
+    },
+    "humanURL": {
+      "@id": "caltech:humanURL",
+      "@type": "@id"
+    },
+    "record": "caltech:record",
+    "doi": {
+      "@id": "caltech:doi",
+      "@type": "@id"
+    },
+    "metadata": "caltech:metadata",
+    "files": "caltech:files",
+    "created": {
+      "@id": "schema:dateCreated",
+      "@type": "schema:Date"
+    },
+    "updated": {
+      "@id": "schema:dateModified",
+      "@type": "schema:Date"
+    }
+  },
+  "@type": "CollegeOrUniversity",
+  "name": "California Institute of Technology",
+  "url": "https://www.caltech.edu/",
+  "description": "Private research university in Pasadena, California. Its public, machine-readable footprint is concentrated in research-data (CaltechDATA on InvenioRDM) and astronomy (NASA/IPAC Infrared Science Archive Virtual Observatory) infrastructure.",
+  "logo": "https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg",
+  "sameAs": [
+    "https://github.com/caltechlibrary",
+    "https://github.com/Caltech-IPAC",
+    "https://www.linkedin.com/school/california-institute-of-technology/"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Pasadena",
+    "addressRegion": "CA",
+    "addressCountry": "US"
+  },
+  "api": [
+    {
+      "@type": "DataCatalog",
+      "name": "CaltechDATA REST API",
+      "humanURL": "https://caltechlibrary.github.io/caltechdata_api/",
+      "baseURL": "https://data.caltech.edu/api/records",
+      "description": "Public REST API for CaltechDATA, the Caltech institutional research data repository built on InvenioRDM."
+    },
+    {
+      "@type": "DataCatalog",
+      "name": "CaltechDATA OAI-PMH",
+      "humanURL": "https://data.caltech.edu/",
+      "baseURL": "https://data.caltech.edu/oai2d",
+      "description": "OAI-PMH metadata harvesting endpoint for CaltechDATA."
+    },
+    {
+      "@type": "DataCatalog",
+      "name": "IRSA Virtual Observatory APIs (IPAC)",
+      "humanURL": "https://irsa.ipac.caltech.edu/voapi.html",
+      "baseURL": "https://irsa.ipac.caltech.edu/TAP",
+      "description": "Caltech/IPAC NASA Infrared Science Archive IVOA-standard Virtual Observatory APIs (TAP, SCS, SIA)."
+    }
+  ]
+}
