@@ -78,6 +78,8 @@ apis:
       - type: GitHub
         url: https://github.com/Caltech-IPAC
 common:
+  - type: DomainSecurity
+    url: security/caltech-domain-security.yml
   - type: Website
     url: https://www.caltech.edu/
   - type: GitHub
