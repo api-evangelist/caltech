@@ -2,13 +2,24 @@
   "repo": "caltech",
   "feeds": [
     {
-      "source": "https://www.caltech.edu/about/news",
+      "source": "https://www.caltech.edu/about/news/rss",
       "feed_url": "https://www.caltech.edu/about/news/rss",
-      "title": "Caltech News",
-      "saved": 7,
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://www.caltech.edu/",
+      "feed_url": "https://www.caltech.edu/",
+      "title": "",
+      "saved": 0,
       "method": "none"
+    },
+    {
+      "source": "https://www.caltech.edu/about/news",
+      "error": "HTTPError"
     }
   ],
-  "post_count": 30,
-  "fetched": "2026-08-15T12:11:08Z"
+  "post_count": 33,
+  "fetched": "2026-08-22T20:20:02Z"
 }
