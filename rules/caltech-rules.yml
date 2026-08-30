@@ -1,0 +1,79 @@
+---
+# Governance observations for Caltech-operated surfaces.
+# These are API Evangelist's findings ABOUT the estate, not rules Caltech publishes.
+x-aid: caltech
+x-name: California Institute of Technology — Governance Observations
+x-generated: '2026-08-19'
+x-method: derived
+x-source:
+  - openapi/caltech-caltechdata-openapi.yml
+  - openapi/caltech-scedc-fdsn-openapi.yml
+  - conformance/caltech-education-standards.yml
+  - errors/caltech-errors.yml
+  - lifecycle/caltech-lifecycle.yml
+x-disclaimer: >-
+  Caltech publishes no API design guide, style guide or linting ruleset. Nothing in this
+  file should be read as a Caltech-authored governance artifact.
+
+x-findings:
+  - id: no-institutional-api-governance
+    severity: informational
+    finding: >-
+      No institution-wide API governance exists. Four operating units — Caltech Library,
+      the Seismological Laboratory, IPAC, and IMSS — each publish machine-readable
+      surfaces under caltech.edu with no shared design, error, versioning or
+      authentication convention between them.
+    evidence: Four distinct error serializations across four surfaces; see errors/caltech-errors.yml.
+
+  - id: standards-carry-the-governance
+    severity: informational
+    finding: >-
+      Where Caltech's surfaces are well governed, the governance is the community
+      standard's, not the institution's. FDSN supplies versioning and no-data semantics;
+      IVOA supplies self-description and structured errors; OAI-PMH supplies error codes;
+      SAML supplies metadata expiry. This is the correct posture for research
+      infrastructure and it should be read as a strength — but it is inherited, not built.
+
+  - id: no-published-specification
+    severity: medium
+    finding: >-
+      Caltech publishes no OpenAPI for any surface. The single machine-readable service
+      description it does publish is a WADL for fdsnws-dataselect. Both OpenAPI documents
+      in this repository are DERIVED by API Evangelist from live probes and are marked
+      x-operator plus method:derived so they are not credited to Caltech.
+    evidence: https://service.scedc.caltech.edu/fdsnws/dataselect/1/application.wadl
+
+  - id: no-agent-surface
+    severity: medium
+    finding: >-
+      No llms.txt, no .well-known catalog, no security.txt, no MCP server, no agent card.
+      Verified 404 on https://www.caltech.edu/llms.txt and
+      https://www.caltech.edu/.well-known/security.txt.
+
+  - id: no-developer-portal
+    severity: informational
+    finding: >-
+      Neither api.caltech.edu nor developer.caltech.edu resolves (DNS failure, verified
+      2026-08-19). There is no front door to Caltech's programmable surface; every one of
+      them is found through its own operating unit.
+
+  - id: orcid-is-the-only-join-key
+    severity: informational
+    finding: >-
+      ORCID is the only identifier that joins a person across CaltechDATA, CaltechAUTHORS
+      and Caltech Library Feeds. There is no public institutional person identifier that
+      spans the estate.
+
+  - id: selective-bot-blocking
+    severity: low
+    finding: >-
+      scedc.caltech.edu/ returns 200 while scedc.caltech.edu/data/web-services.html
+      returns 403 with an encoded challenge body, and www.caltech.edu/about/news returns
+      403 while its Atom feed at /about/news/rss returns 200. Documentation is harder for
+      a machine to reach than the data it documents.
+
+  - id: unversioned-api-over-versioned-data
+    severity: low
+    finding: >-
+      CaltechDATA versions every record and mints a DOI per version, but exposes no API
+      version at all. The data contract is durable; the interface contract is not stated.

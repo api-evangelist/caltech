@@ -1,0 +1,113 @@
+---
+aid: caltech
+name: California Institute of Technology — Authentication Posture
+generated: '2026-08-19'
+method: probed
+source:
+  - https://data.caltech.edu/api/records?size=1
+  - https://service.scedc.caltech.edu/fdsnws/station/1/version
+  - https://irsa.ipac.caltech.edu/TAP/capabilities
+  - https://idp.caltech.edu/idp/shibboleth
+  - https://mdq.incommon.org/entities/https%3A%2F%2Fidp.caltech.edu%2Fidp%2Fshibboleth
+description: >-
+  Caltech's public machine-readable surfaces are open research infrastructure and require
+  no credential to read. The institution's authentication engineering is concentrated in
+  its identity federation, which is itself a machine-readable surface but governs access
+  to internal systems rather than to the public APIs.
+
+surfaces:
+  - surface: CaltechDATA REST API
+    baseURL: https://data.caltech.edu/api
+    x-operator: institution
+    public_read: true
+    auth_required_for_read: false
+    verified: '2026-08-19 — 200 application/json with no Authorization header'
+    write_auth:
+      scheme: bearer
+      type: personal access token
+      note: >-
+        InvenioRDM issues personal access tokens for deposit/write operations. Token
+        issuance is behind authentication and was NOT probed; recorded as software
+        capability, not as a verified Caltech-published contract.
+      method: derived
+
+  - surface: CaltechDATA OAI-PMH
+    baseURL: https://data.caltech.edu/oai2d
+    x-operator: institution
+    public_read: true
+    auth_required_for_read: false
+    verified: '2026-08-19 — Identify verb returned 200 text/xml unauthenticated'
+
+  - surface: CaltechAUTHORS REST + OAI-PMH
+    baseURL: https://authors.library.caltech.edu
+    x-operator: institution
+    public_read: true
+    auth_required_for_read: false
+    verified: '2026-08-19 — 200 application/json unauthenticated'
+    reliability_note: >-
+      Intermittent HTTP 522 (Cloudflare origin unreachable) observed on 2026-08-19
+      between successful calls. The surface is LIVE but flapping.
+
+  - surface: SCEDC FDSN Web Services
+    baseURL: https://service.scedc.caltech.edu/fdsnws
+    x-operator: institution
+    public_read: true
+    auth_required_for_read: false
+    verified: '2026-08-19 — real event and station queries returned data unauthenticated'
+    note: >-
+      The FDSN specification defines an optional /queryauth endpoint for restricted data.
+      Not probed; not claimed.
+
+  - surface: IRSA / NED / NASA Exoplanet Archive IVOA services
+    baseURL: https://irsa.ipac.caltech.edu/TAP
+    x-operator: institution
+    public_read: true
+    auth_required_for_read: false
+    verified: '2026-08-19 — TAP sync queries returned real rows unauthenticated'
+    declared_security:
+      standardID: 'ivo://ivoa.net/sso#cookie'
+      source: https://irsa.ipac.caltech.edu/TAP/capabilities
+      note: >-
+        The TAP capabilities document declares an IVOA SSO cookie security method for
+        authenticated access to proprietary data. Read as declared in-contract, not probed.
+
+  - surface: Caltech Library Feeds
+    baseURL: https://feeds.library.caltech.edu
+    x-operator: institution
+    public_read: true
+    auth_required_for_read: false
+    verified: '2026-08-19 — JSON datasets returned 200 unauthenticated'
+
+identity_federation:
+  surface: Caltech Shibboleth Identity Provider
+  entityID: https://idp.caltech.edu/idp/shibboleth
+  x-operator: institution
+  protocols:
+    - urn:mace:shibboleth:1.0
+    - urn:oasis:names:tc:SAML:1.1:protocol
+    - urn:oasis:names:tc:SAML:2.0:protocol
+  scope: caltech.edu
+  federation: InCommon (registrationAuthority https://incommon.org), and therefore eduGAIN
+  sso_bindings:
+    - urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST
+    - urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect
+    - urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign
+  attribute_authority: https://idp.caltech.edu:8443/idp/profile/SAML2/SOAP/AttributeQuery
+  single_logout: https://idp.caltech.edu/idp/profile/Logout
+  verified: '2026-08-19 — metadata retrieved 200 from both the IdP and the InCommon MDQ service'
+  note: >-
+    This governs access to Caltech systems for Caltech identities and for federated
+    partners. It is not an API gateway for the public data surfaces above, which are open.
+
+absent:
+  - what: OAuth 2.0 authorization server for public API access
+    status: not_found
+    note: No public OAuth client registration or authorization endpoint found.
+  - what: API key issuance for public read
+    status: not_applicable
+    note: All public surfaces read without credentials.
+  - what: Documented scope vocabulary
+    status: not_found
+    note: >-
+      No published scope list for any Caltech surface. This is why there is no scopes/
+      artifact in this repo — the absence is the finding.

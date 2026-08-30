@@ -1,0 +1,28 @@
+---
+# Verbatim response captured from a live SCEDC FDSN event query. Not synthesized.
+generated: '2026-08-19'
+method: probed
+source: https://service.scedc.caltech.edu/fdsnws/event/1/query?starttime=2026-08-01&endtime=2026-08-05&minmagnitude=3&format=text
+status_code: 200
+content_type: text/plain; charset=UTF-8
+columns:
+  - EventID
+  - Time
+  - Latitude
+  - Longitude
+  - Depth/km
+  - Author
+  - Catalog
+  - ET
+  - GT
+  - MagType
+  - Magnitude
+  - MagAuthor
+  - EventLocationName
+body: |
+  #EventID  | Time                | Latitude | Longtitude   | Depth/km | Author | Catalog | ET | GT   | MagType | Magnitude | MagAuthor | EventLocationName
+  40666002 | 2026/08/04 13:21:09.9500 | 36.09200 | -119.9300000 | 14.84    | CI     | SCEDC   | eq | r |   h     |  3.70     | CI        |    9.7 km (   6.0 mi) NNE (az=  17.1) from Kettleman City, CA
+  10248238 | 2026/08/02 13:10:47.9470 | 27.37360 | -111.0607000 | 10.00    | US     | SCEDC   | eq | t |   w     |  5.10     | US        |  656.2 km ( 407.7 mi) SE (az= 143.5) from Estacion Coahuila, B.C., MX
+note: >-
+  The header row misspells "Longitude" as "Longtitude". Recorded as observed — a client
+  parsing by column name has to match the typo.

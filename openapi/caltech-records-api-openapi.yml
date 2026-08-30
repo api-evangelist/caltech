@@ -1,0 +1,258 @@
+openapi: 3.2.0
+info:
+  title: CaltechDATA REST Records API
+  version: 1.0.0
+  summary: Public read API for CaltechDATA, the Caltech institutional research data repository.
+  description: CaltechDATA (https://data.caltech.edu) is the California Institute of Technology's institutional research data repository, operated by the Caltech Library on the institution's own `caltech.edu` domain. The repository software is InvenioRDM, an open-source platform (CERN/InvenioRDM community) that Caltech Library self-hosts — it is NOT a hosted vendor tenancy, so the operator of this surface is the institution. This document is DERIVED by API Evangelist from live, unauthenticated probes of the public endpoints; Caltech does not publish an OpenAPI description of its own. Only operations actually observed returning data are described here.
+  contact:
+    name: Caltech Library
+    url: https://library.caltech.edu/
+  license:
+    name: Repository terms vary per record; see each record's `access` and `rights` metadata
+    url: https://data.caltech.edu/
+servers:
+- url: https://data.caltech.edu/api
+  description: CaltechDATA production API (verified live 2026-08-19)
+tags:
+- name: Records
+  description: Published research data records, their metadata, files and DOIs.
+paths:
+  /records:
+    get:
+      operationId: searchRecords
+      summary: Search published records
+      description: Returns a paged hit list of published CaltechDATA records. Verified live 2026-08-19 returning application/json with populated `hits.hits[]`.
+      tags:
+      - Records
+      parameters:
+      - name: q
+        in: query
+        description: Search query string.
+        required: false
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: Number of records per page.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 10
+      - name: page
+        in: query
+        description: Page number, 1-indexed.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: sort
+        in: query
+        description: Sort order (e.g. newest, bestmatch).
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A page of matching records.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordSearchResult'
+  /records/{id}:
+    get:
+      operationId: getRecord
+      summary: Retrieve a single record
+      description: Returns one published record by its CaltechDATA persistent identifier. Verified live 2026-08-19 (200) and verified 404 behaviour on an unknown id.
+      tags:
+      - Records
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: CaltechDATA record identifier, e.g. `je5p4-zyb48`.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record'
+        '404':
+          description: No record with that persistent identifier.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Record:
+      type: object
+      description: A published CaltechDATA record, in InvenioRDM record shape.
+      properties:
+        id:
+          type: string
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        revision_id:
+          type: integer
+        is_published:
+          type: boolean
+        is_draft:
+          type: boolean
+        status:
+          type: string
+        pids:
+          $ref: '#/components/schemas/PersistentIdentifiers'
+        metadata:
+          $ref: '#/components/schemas/RecordMetadata'
+        access:
+          type: object
+        files:
+          type: object
+        media_files:
+          type: object
+        custom_fields:
+          type: object
+        parent:
+          type: object
+        versions:
+          type: object
+        stats:
+          type: object
+        links:
+          type: object
+          additionalProperties:
+            type: string
+    RecordMetadata:
+      type: object
+      properties:
+        title:
+          type: string
+        publication_date:
+          type: string
+        resource_type:
+          type: object
+        description:
+          type: string
+        creators:
+          type: array
+          items:
+            $ref: '#/components/schemas/Creator'
+        rights:
+          type: array
+          items:
+            type: object
+    Creator:
+      type: object
+      properties:
+        person_or_org:
+          type: object
+          properties:
+            type:
+              type: string
+              examples:
+              - personal
+            name:
+              type: string
+            given_name:
+              type: string
+            family_name:
+              type: string
+            identifiers:
+              type: array
+              description: 'Contributor identifiers. ORCID iDs are carried with `scheme: orcid`, observed live in CaltechDATA records.'
+              items:
+                type: object
+                properties:
+                  identifier:
+                    type: string
+                    examples:
+                    - 0000-0002-5590-9620
+                  scheme:
+                    type: string
+                    examples:
+                    - orcid
+        affiliations:
+          type: array
+          items:
+            type: object
+    RecordSearchResult:
+      type: object
+      properties:
+        hits:
+          type: object
+          properties:
+            hits:
+              type: array
+              items:
+                $ref: '#/components/schemas/Record'
+            total:
+              type: integer
+        links:
+          type: object
+          additionalProperties:
+            type: string
+            format: uri
+        sortBy:
+          type: string
+    PersistentIdentifiers:
+      type: object
+      description: DOI and OAI identifiers. CaltechDATA mints DOIs through DataCite under its own prefix 10.22002 — `pids.doi.provider` is observed as `datacite`.
+      properties:
+        doi:
+          type: object
+          properties:
+            identifier:
+              type: string
+              examples:
+              - 10.22002/je5p4-zyb48
+            provider:
+              type: string
+              examples:
+              - datacite
+            client:
+              type: string
+              examples:
+              - datacite
+        oai:
+          type: object
+          properties:
+            identifier:
+              type: string
+              examples:
+              - oai:data.caltech.edu:je5p4-zyb48
+            provider:
+              type: string
+              examples:
+              - oai
+    Error:
+      type: object
+      description: Observed error body shape, verified on a 404.
+      properties:
+        status:
+          type: integer
+          examples:
+          - 404
+        message:
+          type: string
+          examples:
+          - The persistent identifier does not exist.
+x-operator: institution
+x-operator-rationale: 'Host data.caltech.edu is under the institution''s own registrable domain caltech.edu. The repository software is open source (InvenioRDM) and self-hosted by Caltech Library, not an account on a vendor''s shared platform. Compare a Figshare tenancy, which would be x-operator: tenant.'
+x-provenance:
+  generated: '2026-08-19'
+  method: derived
+  derived-from: live unauthenticated HTTP probes, 2026-08-19
+  source:
+  - https://data.caltech.edu/api/records?size=1
+  - https://data.caltech.edu/api/records/je5p4-zyb48
+  - https://caltechlibrary.github.io/caltechdata_api/
+  note: Caltech publishes no OpenAPI for this surface. This description is API Evangelist's observation of the live API, not a Caltech-authored contract, and must not be credited to Caltech as a published specification.

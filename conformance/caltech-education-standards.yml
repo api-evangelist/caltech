@@ -1,0 +1,199 @@
+---
+# Domain-standard conformance for the Kin Score `education` regulatory regime.
+# Every entry below is evidenced by something observed IN A LIVE CONTRACT OR RESPONSE,
+# not by a prose claim on a web page. REWARD-ONLY: standards Caltech does not implement
+# are recorded as not_found, never invented to fill a slot.
+aid: caltech
+name: California Institute of Technology
+regime: education
+regime_id: education
+generated: '2026-08-19'
+method: probed
+source:
+  - https://idp.caltech.edu/idp/shibboleth
+  - https://mdq.incommon.org/entities/https%3A%2F%2Fidp.caltech.edu%2Fidp%2Fshibboleth
+  - https://data.caltech.edu/oai2d?verb=Identify
+  - https://data.caltech.edu/oai2d?verb=ListMetadataFormats
+  - https://authors.library.caltech.edu/oai2d?verb=ListMetadataFormats
+  - https://data.caltech.edu/api/records?size=1
+  - https://feeds.library.caltech.edu/people/people_list.json
+
+standards:
+
+  - id: shibboleth
+    status: conformant
+    operator: institution
+    confidence: high
+    evidence:
+      location: https://idp.caltech.edu/idp/shibboleth
+      artifact: SAML 2.0 metadata document served by Caltech's own Shibboleth Identity Provider
+      element: IDPSSODescriptor/@protocolSupportEnumeration
+      value: 'urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol'
+      supporting:
+        - element: shibmd:Scope
+          value: caltech.edu
+        - element: SingleSignOnService/@Location
+          value: https://idp.caltech.edu/idp/profile/Shibboleth/SSO
+      status_code: 200
+      verified: '2026-08-19'
+    notes: >-
+      Caltech runs its own Shibboleth IdP on its own domain. The Shibboleth-native
+      AuthnRequest binding is advertised alongside SAML 1.1 and SAML 2.0.
+
+  - id: saml
+    status: conformant
+    operator: institution
+    confidence: high
+    evidence:
+      location: https://mdq.incommon.org/entities/https%3A%2F%2Fidp.caltech.edu%2Fidp%2Fshibboleth
+      artifact: Signed InCommon federation metadata for Caltech's entity
+      element: EntityDescriptor/@entityID
+      value: https://idp.caltech.edu/idp/shibboleth
+      supporting:
+        - element: mdrpi:RegistrationInfo/@registrationAuthority
+          value: https://incommon.org
+        - element: OrganizationName
+          value: California Institute of Technology
+        - element: SingleSignOnService bindings
+          value: 'HTTP-POST, HTTP-Redirect, POST-SimpleSign, SOAP artifact resolution'
+        - element: AttributeAuthorityDescriptor/AttributeService
+          value: https://idp.caltech.edu:8443/idp/profile/SAML2/SOAP/AttributeQuery
+      status_code: 200
+      verified: '2026-08-19'
+    notes: >-
+      Full SAML 2.0 IdP with an attribute authority, registered in the InCommon
+      federation (and therefore reachable via eduGAIN). This is an institution-operated,
+      machine-readable surface by definition — no vendor can hold it on Caltech's behalf.
+
+  - id: oai-pmh
+    status: conformant
+    operator: institution
+    confidence: high
+    evidence:
+      location: https://data.caltech.edu/oai2d?verb=Identify
+      artifact: OAI-PMH 2.0 Identify response
+      element: Identify/protocolVersion
+      value: '2.0'
+      supporting:
+        - element: Identify/repositoryName
+          value: CaltechDATA
+        - element: Identify/baseURL
+          value: https://data.caltech.edu/oai2d
+        - element: Identify/earliestDatestamp
+          value: '2022-09-07T19:55:11Z'
+        - element: second endpoint
+          value: https://authors.library.caltech.edu/oai2d
+        - element: error handling
+          value: 'verb=Bogus returns <error code="badArgument">, per the OAI-PMH spec'
+      status_code: 200
+      verified: '2026-08-19'
+    notes: >-
+      Two OAI-PMH 2.0 endpoints, both on institution-owned hosts: CaltechDATA (research
+      data) and CaltechAUTHORS (publications). Confirmed with the Identify verb, not by
+      link presence.
+
+  - id: datacite
+    status: conformant
+    operator: institution
+    confidence: high
+    evidence:
+      location: https://data.caltech.edu/api/records?size=1
+      artifact: CaltechDATA REST API record payload
+      element: pids.doi.provider
+      value: datacite
+      supporting:
+        - element: pids.doi.identifier
+          value: '10.22002/je5p4-zyb48 (Caltech''s own DataCite DOI prefix 10.22002)'
+        - element: pids.doi.client
+          value: datacite
+        - element: OAI-PMH ListMetadataFormats
+          value: 'datacite, oai_datacite, datacite4, oai_datacite4 offered on both repositories'
+      status_code: 200
+      verified: '2026-08-19'
+    notes: >-
+      Caltech is a DataCite member minting DOIs under its own prefix, and serves DataCite
+      4 metadata over OAI-PMH. Evidenced in the API response body and in the repository's
+      advertised metadata formats.
+
+  - id: orcid
+    status: conformant
+    operator: institution
+    confidence: high
+    evidence:
+      location: https://data.caltech.edu/api/records?size=1
+      artifact: CaltechDATA REST API record payload
+      element: metadata.creators[].person_or_org.identifiers[].scheme
+      value: orcid
+      supporting:
+        - element: identifier value
+          value: '0000-0002-5590-9620'
+        - element: https://feeds.library.caltech.edu/people/people_list.json
+          value: '3,885 Caltech people records, each carrying an `orcid` field'
+        - element: https://authors.library.caltech.edu/api/records
+          value: ORCID identifiers present on CaltechAUTHORS records
+      status_code: 200
+      verified: '2026-08-19'
+    notes: >-
+      ORCID iDs are carried as first-class typed identifiers in the repository contracts
+      and are exposed as a dedicated field in the Caltech Library Feeds people dataset.
+
+  # ---- Probed and NOT found. Recorded so the absence is a measurement, not a silence. ----
+
+  - id: crossref
+    status: not_found
+    confidence: high
+    evidence:
+      location: https://authors.library.caltech.edu/api/records?size=2
+      element: pids.doi.provider
+      value: external
+      status_code: 200
+      verified: '2026-08-19'
+    notes: >-
+      CaltechAUTHORS carries publisher DOIs (e.g. 10.1073/pnas.2418616122) that are
+      Crossref-registered upstream, but the record marks the provider as `external`.
+      Caltech is not the registrant, so no Crossref conformance is claimed.
+
+  - id: scim
+    status: not_found
+    confidence: medium
+    notes: >-
+      No public SCIM endpoint found. Identity provisioning at Caltech is behind
+      authentication (access.caltech.edu / IMSS); if SCIM is in use it is not a public
+      surface and cannot be evidenced.
+
+  - id: lti
+    status: not_found
+    confidence: medium
+    notes: No publicly reachable LTI tool or platform registration surface found.
+
+  - id: oneroster
+    status: not_found
+    confidence: medium
+    notes: No OneRoster surface found. OneRoster adoption is concentrated in K-12.
+
+  - id: ed-fi
+    status: not_found
+    confidence: high
+    notes: Ed-Fi is a K-12 data standard; not applicable to a private research university.
+
+  - id: caliper
+    status: not_found
+    confidence: medium
+    notes: No public Caliper Analytics event surface found.
+
+  - id: qti
+    status: not_found
+    confidence: medium
+    notes: No public QTI assessment surface found.
+
+summary:
+  probed: 12
+  conformant: 5
+  not_found: 7
+  conformant_ids: [shibboleth, saml, oai-pmh, datacite, orcid]
+  note: >-
+    All five conformant standards are evidenced inside a live contract or response body.
+    All five are operated by the institution itself — none is inherited from a vendor
+    tenancy. The seven not_found entries are the learning-management and student-
+    information standards; Caltech exposes none of them publicly, which is normal for a
+    research-intensive institution of ~2,400 students.

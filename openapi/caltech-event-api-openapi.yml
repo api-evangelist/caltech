@@ -1,0 +1,104 @@
+openapi: 3.2.0
+info:
+  title: SCEDC FDSN Web Services (Caltech Seismological Laboratory) Event API
+  version: 1.1.1
+  summary: FDSN-standard seismic web services operated by the Southern California Earthquake Data Center at the Caltech Seismological Laboratory.
+  description: The Southern California Earthquake Data Center (SCEDC) is operated by the Seismological Laboratory at the California Institute of Technology, on Caltech's own `caltech.edu` domain and Caltech-run infrastructure (service.scedc.caltech.edu resolves inside Caltech address space). It implements the International Federation of Digital Seismograph Networks (FDSN) web service specification — `fdsnws-event`, `fdsnws-station` and `fdsnws-dataselect`. This is genuinely institution-operated research infrastructure, not a vendor platform running under Caltech's name. This document is DERIVED by API Evangelist from live, unauthenticated probes; SCEDC publishes a WADL per service but no OpenAPI. Only operations actually observed returning data are described.
+  contact:
+    name: Southern California Earthquake Data Center, Caltech Seismological Laboratory
+    url: https://scedc.caltech.edu/
+servers:
+- url: https://service.scedc.caltech.edu/fdsnws
+  description: SCEDC production FDSN web services (verified live 2026-08-19)
+tags:
+- name: Event
+  description: Earthquake event catalog queries (fdsnws-event).
+paths:
+  /event/1/version:
+    get:
+      operationId: getEventServiceVersion
+      summary: Service version for fdsnws-event
+      description: Verified live 2026-08-19 returning `1.1.1` as text/plain.
+      tags:
+      - Event
+      responses:
+        '200':
+          description: Service version string.
+          content:
+            text/plain:
+              schema:
+                type: string
+                examples:
+                - 1.1.1
+  /event/1/query:
+    get:
+      operationId: queryEvents
+      summary: Query the earthquake event catalog
+      description: Returns earthquakes matching the supplied time, magnitude and location filters. Verified live 2026-08-19 returning real SCEDC catalog rows as text/plain, and verified returning HTTP 400 with a structured plain-text error on a bad date.
+      tags:
+      - Event
+      parameters:
+      - name: starttime
+        in: query
+        description: ISO-8601 start of the time window.
+        schema:
+          type: string
+      - name: endtime
+        in: query
+        description: ISO-8601 end of the time window.
+        schema:
+          type: string
+      - name: minmagnitude
+        in: query
+        description: Minimum event magnitude.
+        schema:
+          type: number
+      - name: maxmagnitude
+        in: query
+        description: Maximum event magnitude.
+        schema:
+          type: number
+      - name: format
+        in: query
+        description: Response format. `text` and `xml` (QuakeML) observed.
+        schema:
+          type: string
+          enum:
+          - text
+          - xml
+      responses:
+        '200':
+          description: 'Pipe-delimited event rows (format=text) or QuakeML (format=xml). Observed columns: EventID, Time, Latitude, Longitude, Depth/km, Author, Catalog, ET, GT, MagType, Magnitude, MagAuthor, EventLocationName.'
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+        '204':
+          description: No events matched the request. Observed on fdsnws-dataselect; FDSN-standard no-data response.
+        '400':
+          description: Malformed request. Verified live — returns text/plain carrying the error message, the submitted request, a timestamp and the service version.
+          content:
+            text/plain:
+              schema:
+                type: string
+x-operator: institution
+x-operator-rationale: service.scedc.caltech.edu is under the institution's own registrable domain and resolves to Caltech-operated hosts (134.4.54.0/24, Caltech address space). SCEDC is a Caltech Seismological Laboratory facility. FDSN is an open community standard the institution implements, not a vendor product it rents.
+x-provenance:
+  generated: '2026-08-19'
+  method: derived
+  derived-from: live unauthenticated HTTP probes, 2026-08-19
+  source:
+  - https://service.scedc.caltech.edu/fdsnws/station/1/version
+  - https://service.scedc.caltech.edu/fdsnws/event/1/version
+  - https://service.scedc.caltech.edu/fdsnws/dataselect/1/version
+  - https://service.scedc.caltech.edu/fdsnws/dataselect/1/application.wadl
+  - https://service.scedc.caltech.edu/fdsnws/station/1/query?net=CI&sta=PAS&level=station&format=text
+  - https://service.scedc.caltech.edu/fdsnws/event/1/query?starttime=2026-08-01&endtime=2026-08-05&minmagnitude=3&format=text
+  note: SCEDC publishes no OpenAPI. This description is API Evangelist's observation of the live services and must not be credited to Caltech as a published specification. The upstream normative contract is the FDSN web service specification.
+x-standards:
+- name: FDSN Web Services
+  version: '1.1'
+  url: https://www.fdsn.org/webservices/

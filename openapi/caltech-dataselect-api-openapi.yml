@@ -1,0 +1,113 @@
+openapi: 3.2.0
+info:
+  title: SCEDC FDSN Web Services (Caltech Seismological Laboratory) Data Select API
+  version: 1.1.1
+  summary: FDSN-standard seismic web services operated by the Southern California Earthquake Data Center at the Caltech Seismological Laboratory.
+  description: The Southern California Earthquake Data Center (SCEDC) is operated by the Seismological Laboratory at the California Institute of Technology, on Caltech's own `caltech.edu` domain and Caltech-run infrastructure (service.scedc.caltech.edu resolves inside Caltech address space). It implements the International Federation of Digital Seismograph Networks (FDSN) web service specification — `fdsnws-event`, `fdsnws-station` and `fdsnws-dataselect`. This is genuinely institution-operated research infrastructure, not a vendor platform running under Caltech's name. This document is DERIVED by API Evangelist from live, unauthenticated probes; SCEDC publishes a WADL per service but no OpenAPI. Only operations actually observed returning data are described.
+  contact:
+    name: Southern California Earthquake Data Center, Caltech Seismological Laboratory
+    url: https://scedc.caltech.edu/
+servers:
+- url: https://service.scedc.caltech.edu/fdsnws
+  description: SCEDC production FDSN web services (verified live 2026-08-19)
+tags:
+- name: DataSelect
+  description: Time-series waveform retrieval (fdsnws-dataselect).
+paths:
+  /dataselect/1/version:
+    get:
+      operationId: getDataSelectServiceVersion
+      summary: Service version for fdsnws-dataselect
+      description: Verified live 2026-08-19 returning `1.1.0` as text/plain.
+      tags:
+      - DataSelect
+      responses:
+        '200':
+          description: Service version string.
+          content:
+            text/plain:
+              schema:
+                type: string
+                examples:
+                - 1.1.0
+  /dataselect/1/application.wadl:
+    get:
+      operationId: getDataSelectWadl
+      summary: WADL description of fdsnws-dataselect
+      description: SCEDC's own machine-readable service description. Verified live 2026-08-19 returning application/xml. This is the only machine-readable contract SCEDC itself publishes for the service.
+      tags:
+      - DataSelect
+      responses:
+        '200':
+          description: WADL document.
+          content:
+            application/xml:
+              schema:
+                type: string
+  /dataselect/1/query:
+    get:
+      operationId: queryWaveforms
+      summary: Retrieve time-series waveform data
+      description: Returns miniSEED waveform data for the requested network, station, channel and time window. Verified live 2026-08-19 returning HTTP 204 for a window with no available data — the FDSN-standard no-data response.
+      tags:
+      - DataSelect
+      parameters:
+      - name: net
+        in: query
+        schema:
+          type: string
+      - name: sta
+        in: query
+        schema:
+          type: string
+      - name: cha
+        in: query
+        schema:
+          type: string
+      - name: loc
+        in: query
+        description: Location code; `--` denotes a blank location code.
+        schema:
+          type: string
+      - name: start
+        in: query
+        schema:
+          type: string
+      - name: end
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: miniSEED waveform data.
+          content:
+            application/vnd.fdsn.mseed:
+              schema:
+                type: string
+                format: binary
+        '204':
+          description: No waveform data available for the requested window. Verified live.
+        '400':
+          description: Malformed request.
+          content:
+            text/plain:
+              schema:
+                type: string
+x-operator: institution
+x-operator-rationale: service.scedc.caltech.edu is under the institution's own registrable domain and resolves to Caltech-operated hosts (134.4.54.0/24, Caltech address space). SCEDC is a Caltech Seismological Laboratory facility. FDSN is an open community standard the institution implements, not a vendor product it rents.
+x-provenance:
+  generated: '2026-08-19'
+  method: derived
+  derived-from: live unauthenticated HTTP probes, 2026-08-19
+  source:
+  - https://service.scedc.caltech.edu/fdsnws/station/1/version
+  - https://service.scedc.caltech.edu/fdsnws/event/1/version
+  - https://service.scedc.caltech.edu/fdsnws/dataselect/1/version
+  - https://service.scedc.caltech.edu/fdsnws/dataselect/1/application.wadl
+  - https://service.scedc.caltech.edu/fdsnws/station/1/query?net=CI&sta=PAS&level=station&format=text
+  - https://service.scedc.caltech.edu/fdsnws/event/1/query?starttime=2026-08-01&endtime=2026-08-05&minmagnitude=3&format=text
+  note: SCEDC publishes no OpenAPI. This description is API Evangelist's observation of the live services and must not be credited to Caltech as a published specification. The upstream normative contract is the FDSN web service specification.
+x-standards:
+- name: FDSN Web Services
+  version: '1.1'
+  url: https://www.fdsn.org/webservices/

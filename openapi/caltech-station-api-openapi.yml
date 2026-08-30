@@ -1,0 +1,109 @@
+openapi: 3.2.0
+info:
+  title: SCEDC FDSN Web Services (Caltech Seismological Laboratory) Station API
+  version: 1.1.1
+  summary: FDSN-standard seismic web services operated by the Southern California Earthquake Data Center at the Caltech Seismological Laboratory.
+  description: The Southern California Earthquake Data Center (SCEDC) is operated by the Seismological Laboratory at the California Institute of Technology, on Caltech's own `caltech.edu` domain and Caltech-run infrastructure (service.scedc.caltech.edu resolves inside Caltech address space). It implements the International Federation of Digital Seismograph Networks (FDSN) web service specification — `fdsnws-event`, `fdsnws-station` and `fdsnws-dataselect`. This is genuinely institution-operated research infrastructure, not a vendor platform running under Caltech's name. This document is DERIVED by API Evangelist from live, unauthenticated probes; SCEDC publishes a WADL per service but no OpenAPI. Only operations actually observed returning data are described.
+  contact:
+    name: Southern California Earthquake Data Center, Caltech Seismological Laboratory
+    url: https://scedc.caltech.edu/
+servers:
+- url: https://service.scedc.caltech.edu/fdsnws
+  description: SCEDC production FDSN web services (verified live 2026-08-19)
+tags:
+- name: Station
+  description: Station and channel metadata queries (fdsnws-station).
+paths:
+  /station/1/version:
+    get:
+      operationId: getStationServiceVersion
+      summary: Service version for fdsnws-station
+      description: Verified live 2026-08-19 returning `1.1.0` as text/plain.
+      tags:
+      - Station
+      responses:
+        '200':
+          description: Service version string.
+          content:
+            text/plain:
+              schema:
+                type: string
+                examples:
+                - 1.1.0
+  /station/1/query:
+    get:
+      operationId: queryStations
+      summary: Query station and channel metadata
+      description: Returns network, station and channel inventory. Verified live 2026-08-19 returning the CI network Pasadena (PAS) station row.
+      tags:
+      - Station
+      parameters:
+      - name: net
+        in: query
+        description: Network code, e.g. `CI` (California Integrated Seismic Network, Southern California).
+        schema:
+          type: string
+      - name: sta
+        in: query
+        description: Station code, e.g. `PAS`.
+        schema:
+          type: string
+      - name: cha
+        in: query
+        description: Channel code, e.g. `BHZ`.
+        schema:
+          type: string
+      - name: level
+        in: query
+        description: Level of detail returned.
+        schema:
+          type: string
+          enum:
+          - network
+          - station
+          - channel
+          - response
+      - name: format
+        in: query
+        description: Response format. `text` and `xml` (StationXML) observed.
+        schema:
+          type: string
+          enum:
+          - text
+          - xml
+      responses:
+        '200':
+          description: 'Pipe-delimited station rows (format=text) or StationXML (format=xml). Observed columns: Network, Station, Latitude, Longitude, Elevation, SiteName, StartTime, EndTime.'
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+        '204':
+          description: No stations matched the request.
+        '400':
+          description: Malformed request.
+          content:
+            text/plain:
+              schema:
+                type: string
+x-operator: institution
+x-operator-rationale: service.scedc.caltech.edu is under the institution's own registrable domain and resolves to Caltech-operated hosts (134.4.54.0/24, Caltech address space). SCEDC is a Caltech Seismological Laboratory facility. FDSN is an open community standard the institution implements, not a vendor product it rents.
+x-provenance:
+  generated: '2026-08-19'
+  method: derived
+  derived-from: live unauthenticated HTTP probes, 2026-08-19
+  source:
+  - https://service.scedc.caltech.edu/fdsnws/station/1/version
+  - https://service.scedc.caltech.edu/fdsnws/event/1/version
+  - https://service.scedc.caltech.edu/fdsnws/dataselect/1/version
+  - https://service.scedc.caltech.edu/fdsnws/dataselect/1/application.wadl
+  - https://service.scedc.caltech.edu/fdsnws/station/1/query?net=CI&sta=PAS&level=station&format=text
+  - https://service.scedc.caltech.edu/fdsnws/event/1/query?starttime=2026-08-01&endtime=2026-08-05&minmagnitude=3&format=text
+  note: SCEDC publishes no OpenAPI. This description is API Evangelist's observation of the live services and must not be credited to Caltech as a published specification. The upstream normative contract is the FDSN web service specification.
+x-standards:
+- name: FDSN Web Services
+  version: '1.1'
+  url: https://www.fdsn.org/webservices/

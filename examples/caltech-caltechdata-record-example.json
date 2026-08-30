@@ -1,0 +1,64 @@
+{
+  "_provenance": {
+    "generated": "2026-08-19",
+    "method": "probed",
+    "source": "https://data.caltech.edu/api/records?size=1",
+    "status_code": 200,
+    "note": "Verbatim first record from a live unauthenticated call, trimmed to the fields that carry the DataCite and ORCID conformance evidence. Not synthesized."
+  },
+  "id": "je5p4-zyb48",
+  "created": "2026-08-17T20:14:53.660241+00:00",
+  "updated": "2026-08-17T20:14:53.829290+00:00",
+  "is_published": true,
+  "status": "published",
+  "pids": {
+    "doi": {
+      "identifier": "10.22002/je5p4-zyb48",
+      "provider": "datacite",
+      "client": "datacite"
+    },
+    "oai": {
+      "identifier": "oai:data.caltech.edu:je5p4-zyb48",
+      "provider": "oai"
+    }
+  },
+  "metadata": {
+    "title": "Dataset: Identification of eIF4ET binding partners in C. elegans",
+    "publication_date": "2026-08-10",
+    "resource_type": {
+      "id": "dataset",
+      "title": {
+        "en": "Dataset"
+      }
+    },
+    "creators": [
+      {
+        "person_or_org": {
+          "type": "personal",
+          "name": "Woodruff, Jeffrey B.",
+          "given_name": "Jeffrey B.",
+          "family_name": "Woodruff",
+          "identifiers": [
+            {
+              "identifier": "0000-0002-5590-9620",
+              "scheme": "orcid"
+            }
+          ]
+        },
+        "affiliations": [
+          {
+            "name": "Cell Biology, The University of Texas Southwestern Medical Center, Dallas, TX, United States"
+          }
+        ]
+      }
+    ]
+  },
+  "links": {
+    "self": "https://data.caltech.edu/api/records/je5p4-zyb48",
+    "self_html": "https://data.caltech.edu/records/je5p4-zyb48",
+    "preview_html": "https://data.caltech.edu/records/je5p4-zyb48?preview=1",
+    "doi": "https://doi.org/10.22002/je5p4-zyb48",
+    "self_doi": "https://doi.org/10.22002/je5p4-zyb48",
+    "self_doi_html": "https://data.caltech.edu/doi/10.22002/je5p4-zyb48"
+  }
+}
