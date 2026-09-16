@@ -1,27 +1,22 @@
----
 aid: caltech
 name: California Institute of Technology
 x-type: university
 x-category: Private Research University
-description: >-
-  The California Institute of Technology (Caltech) is a private research university in
-  Pasadena, California, and one of the rare institutions in this cohort whose
-  machine-readable footprint is genuinely its own rather than a vendor's contract running
-  under its name. Caltech operates no central developer portal — neither api.caltech.edu
-  nor developer.caltech.edu resolves — and publishes no OpenAPI, no llms.txt, no
-  .well-known catalog and no status page. What it does operate is real research
-  infrastructure on its own domain, engineered by four independent units with no shared
-  convention between them: Caltech Library runs CaltechDATA and CaltechAUTHORS on
-  self-hosted InvenioRDM, with public REST APIs, OAI-PMH 2.0 endpoints and DataCite DOIs
-  minted under Caltech's own 10.22002 prefix; the Seismological Laboratory runs the
-  Southern California Earthquake Data Center's FDSN web services; Caltech/IPAC runs three
-  NASA archives — IRSA, NED and the NASA Exoplanet Archive — behind IVOA Virtual
-  Observatory interfaces; and IMSS runs a Shibboleth identity provider registered in the
-  InCommon federation. Five of the twelve education-regime domain standards are evidenced
-  directly inside live Caltech contracts: shibboleth, saml, oai-pmh, datacite and orcid.
-  The library discovery layer is the one genuinely outsourced surface, a Springshare
-  tenancy at libguides.caltech.edu. The honest summary is that Caltech ships excellent
-  open research data and almost no API product management around it.
+description: 'The California Institute of Technology (Caltech) is a private research university in Pasadena,
+  California, and one of the rare institutions in this cohort whose machine-readable footprint is genuinely
+  its own rather than a vendor''s contract running under its name. Caltech operates no central developer
+  portal — neither api.caltech.edu nor developer.caltech.edu resolves — and publishes no OpenAPI, no llms.txt,
+  no .well-known catalog and no status page. What it does operate is real research infrastructure on its
+  own domain, engineered by four independent units with no shared convention between them: Caltech Library
+  runs CaltechDATA and CaltechAUTHORS on self-hosted InvenioRDM, with public REST APIs, OAI-PMH 2.0 endpoints
+  and DataCite DOIs minted under Caltech''s own 10.22002 prefix; the Seismological Laboratory runs the
+  Southern California Earthquake Data Center''s FDSN web services; Caltech/IPAC runs three NASA archives
+  — IRSA, NED and the NASA Exoplanet Archive — behind IVOA Virtual Observatory interfaces; and IMSS runs
+  a Shibboleth identity provider registered in the InCommon federation. Five of the twelve education-regime
+  domain standards are evidenced directly inside live Caltech contracts: shibboleth, saml, oai-pmh, datacite
+  and orcid. The library discovery layer is the one genuinely outsourced surface, a Springshare tenancy
+  at libguides.caltech.edu. The honest summary is that Caltech ships excellent open research data and
+  almost no API product management around it.'
 type: Index
 deliveryModel:
   model: saas
@@ -44,7 +39,7 @@ accessModel:
   label: Free
   confidence: high
   source:
-    - plans
+  - plans
   generated: '2026-08-19'
   method: probed
 position: Consuming
@@ -52,32 +47,31 @@ access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/caltech.png
 url: https://raw.githubusercontent.com/api-evangelist/caltech/refs/heads/main/apis.yml
 tags:
-  - University
-  - Higher Education
-  - Education
-  - Private Research University
-  - Institute of Technology
-  - United States
-  - California
-  - Research Data
-  - Open Data
-  - Research Repository
-  - Identity Federation
-  - Astronomy
-  - Seismology
-  - Research Computing
-  - OAI-PMH
+- University
+- Higher Education
+- Education
+- Private Research University
+- Institute of Technology
+- United States
+- California
+- Research Data
+- Open Data
+- Research Repository
+- Identity Federation
+- Astronomy
+- Seismology
+- Research Computing
+- OAI-PMH
 created: '2026-06-03'
-modified: '2026-08-19'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - aid: caltech:caltechdata-oai
   name: CaltechDATA OAI-PMH
   x-operator: institution
-  description: >-
-    OAI-PMH 2.0 metadata harvesting endpoint for CaltechDATA. Verified live 2026-08-19 via the Identify
-    verb (repositoryName CaltechDATA, protocolVersion 2.0) and via ListMetadataFormats, which advertises
-    oai_dc, dcat, marc21, marcxml, datacite, oai_datacite, datacite4 and oai_datacite4.
+  description: OAI-PMH 2.0 metadata harvesting endpoint for CaltechDATA. Verified live 2026-08-19 via
+    the Identify verb (repositoryName CaltechDATA, protocolVersion 2.0) and via ListMetadataFormats, which
+    advertises oai_dc, dcat, marc21, marcxml, datacite, oai_datacite, datacite4 and oai_datacite4.
   humanURL: https://data.caltech.edu/
   baseURL: https://data.caltech.edu/oai2d
   tags:
@@ -96,12 +90,11 @@ apis:
 - aid: caltech:caltechauthors
   name: CaltechAUTHORS REST API and OAI-PMH
   x-operator: institution
-  description: >-
-    Caltech's institutional publications repository, also on self-hosted InvenioRDM. Exposes the same
-    REST record API and an OAI-PMH 2.0 endpoint, carrying ORCID and ROR identifiers and Caltech-specific
+  description: 'Caltech''s institutional publications repository, also on self-hosted InvenioRDM. Exposes
+    the same REST record API and an OAI-PMH 2.0 endpoint, carrying ORCID and ROR identifiers and Caltech-specific
     custom fields (journal:journal, caltech:groups, caltech:publication_status). Verified live 2026-08-19.
     Note: intermittent HTTP 522 (Cloudflare origin unreachable) was observed between successful calls
-    — the surface is live but flapping, and Caltech publishes no status page on which to confirm that.
+    — the surface is live but flapping, and Caltech publishes no status page on which to confirm that.'
   humanURL: https://authors.library.caltech.edu/
   baseURL: https://authors.library.caltech.edu/api/records
   tags:
@@ -117,11 +110,10 @@ apis:
 - aid: caltech:library-feeds
   name: Caltech Library Feeds
   x-operator: institution
-  description: >-
-    A metadata service built and operated by Caltech Library (v1.6), harvesting its institutional repositories,
-    public directory and archival systems into static JSON datasets published for data-science use. Built
-    on caltechlibrary's own open-source irdmtools and dataset toolchain. Verified live 2026-08-19 — the
-    people dataset returned 3,885 person records each carrying an ORCID field, and the groups dataset
+  description: A metadata service built and operated by Caltech Library (v1.6), harvesting its institutional
+    repositories, public directory and archival systems into static JSON datasets published for data-science
+    use. Built on caltechlibrary's own open-source irdmtools and dataset toolchain. Verified live 2026-08-19
+    — the people dataset returned 3,885 person records each carrying an ORCID field, and the groups dataset
     returned 4.9 MB of JSON.
   humanURL: https://feeds.library.caltech.edu/
   baseURL: https://feeds.library.caltech.edu/
@@ -143,15 +135,14 @@ apis:
 - aid: caltech:irsa-vo
   name: IRSA Virtual Observatory APIs (Caltech/IPAC)
   x-operator: institution
-  x-operator-rationale: >-
-    IPAC is a division of Caltech and operates IRSA on the institution's own domain. The archive is NASA-funded
-    and holds NASA mission data, but Caltech is the operator of the service and its interfaces.
-  description: >-
-    The NASA/IPAC Infrared Science Archive exposes IVOA-standard Virtual Observatory interfaces — Table
-    Access Protocol (TAP/ADQL), Simple Cone Search and Simple Image Access v2 — over NASA infrared and
-    submillimeter mission catalogs and images. Verified live 2026-08-19: the TAP sync endpoint returned
+  x-operator-rationale: IPAC is a division of Caltech and operates IRSA on the institution's own domain.
+    The archive is NASA-funded and holds NASA mission data, but Caltech is the operator of the service
+    and its interfaces.
+  description: 'The NASA/IPAC Infrared Science Archive exposes IVOA-standard Virtual Observatory interfaces
+    — Table Access Protocol (TAP/ADQL), Simple Cone Search and Simple Image Access v2 — over NASA infrared
+    and submillimeter mission catalogs and images. Verified live 2026-08-19: the TAP sync endpoint returned
     real TAP_SCHEMA rows, and the capabilities document declares VOSI capabilities, availability and tables,
-    DALI examples, and an IVOA SSO cookie security method.
+    DALI examples, and an IVOA SSO cookie security method.'
   humanURL: https://irsa.ipac.caltech.edu/voapi.html
   baseURL: https://irsa.ipac.caltech.edu/TAP
   tags:
@@ -175,11 +166,11 @@ apis:
 - aid: caltech:ned-tap
   name: NED Table Access Protocol (Caltech/IPAC)
   x-operator: institution
-  description: >-
-    The NASA/IPAC Extragalactic Database, operated by Caltech/IPAC, exposes an IVOA TAP service over its
-    extragalactic object catalog. Verified live 2026-08-19 returning TAP_SCHEMA rows as CSV, and returning
-    a spec-conformant VOTable error document — carrying QUERY_STATUS, ERROR_TYPE, PROVIDER and a correlatable
-    REQ_ID — when the REQUEST parameter is omitted. The strongest error semantics in Caltech's estate.
+  description: The NASA/IPAC Extragalactic Database, operated by Caltech/IPAC, exposes an IVOA TAP service
+    over its extragalactic object catalog. Verified live 2026-08-19 returning TAP_SCHEMA rows as CSV,
+    and returning a spec-conformant VOTable error document — carrying QUERY_STATUS, ERROR_TYPE, PROVIDER
+    and a correlatable REQ_ID — when the REQUEST parameter is omitted. The strongest error semantics in
+    Caltech's estate.
   humanURL: https://ned.ipac.caltech.edu/Documents/Guides/Interface/TAP
   baseURL: https://ned.ipac.caltech.edu/tap
   tags:
@@ -199,9 +190,9 @@ apis:
 - aid: caltech:exoplanet-archive-tap
   name: NASA Exoplanet Archive TAP (Caltech/IPAC)
   x-operator: institution
-  description: >-
-    The NASA Exoplanet Archive, operated by Caltech/IPAC, exposes an IVOA TAP service over its confirmed-planet
-    and related tables. Verified live 2026-08-19 returning real planet names from the `ps` table as CSV.
+  description: The NASA Exoplanet Archive, operated by Caltech/IPAC, exposes an IVOA TAP service over
+    its confirmed-planet and related tables. Verified live 2026-08-19 returning real planet names from
+    the `ps` table as CSV.
   humanURL: https://exoplanetarchive.ipac.caltech.edu/docs/program_interfaces.html
   baseURL: https://exoplanetarchive.ipac.caltech.edu/TAP
   tags:
@@ -218,17 +209,15 @@ apis:
 - aid: caltech:identity-federation
   name: Caltech Shibboleth Identity Provider (InCommon)
   x-operator: institution
-  x-operator-rationale: >-
-    An identity federation entry is institution-operated by definition — the entityID, the signing keys
-    and the attribute authority cannot be held by a vendor on the institution's behalf.
-  description: >-
-    Caltech operates its own Shibboleth identity provider at idp.caltech.edu, asserting scoped attributes
-    for caltech.edu. The SAML 2.0 metadata is machine-readable and publicly retrievable both from the
-    IdP itself and, signed, from the InCommon metadata query service — registrationAuthority https://incommon.org,
-    and therefore reachable through eduGAIN. Advertises SAML 1.1, SAML 2.0 and the Shibboleth-native AuthnRequest
-    binding, with HTTP-POST, HTTP-Redirect and POST-SimpleSign SSO bindings and a SOAP attribute authority.
-    Verified live 2026-08-19 from both sources. This is the single most under-catalogued class of university
-    API surface.
+  x-operator-rationale: An identity federation entry is institution-operated by definition — the entityID,
+    the signing keys and the attribute authority cannot be held by a vendor on the institution's behalf.
+  description: Caltech operates its own Shibboleth identity provider at idp.caltech.edu, asserting scoped
+    attributes for caltech.edu. The SAML 2.0 metadata is machine-readable and publicly retrievable both
+    from the IdP itself and, signed, from the InCommon metadata query service — registrationAuthority
+    https://incommon.org, and therefore reachable through eduGAIN. Advertises SAML 1.1, SAML 2.0 and the
+    Shibboleth-native AuthnRequest binding, with HTTP-POST, HTTP-Redirect and POST-SimpleSign SSO bindings
+    and a SOAP attribute authority. Verified live 2026-08-19 from both sources. This is the single most
+    under-catalogued class of university API surface.
   humanURL: https://www.imss.caltech.edu/
   baseURL: https://idp.caltech.edu/idp/shibboleth
   tags:
@@ -254,16 +243,15 @@ apis:
 - aid: caltech:libguides-springshare
   name: Caltech Library Guides (Springshare tenancy)
   x-operator: tenant
-  x-operator-rationale: >-
-    libguides.caltech.edu is an institution-branded subdomain that CNAMEs to a Springshare-operated CloudFront
-    distribution; Caltech is site_id 64 on Springshare's shared platform. The content and the tenancy
-    are Caltech's; the contract is Springshare's. The generic vendor API at lgapi-us.libapps.com (verified
-    401 without a key) is NOT saved under this institution — it belongs to Springshare's own repo.
-  description: >-
-    Caltech Library's discovery and research-guide layer runs on Springshare LibGuides/LibApps rather
-    than on institution-operated software. Recorded as a real institutional relationship — one of the
-    few programmable surfaces most universities have — with no vendor specification saved under Caltech's
-    slug. Verified live 2026-08-19: libguides.caltech.edu 200, caltech.libapps.com 200.
+  x-operator-rationale: libguides.caltech.edu is an institution-branded subdomain that CNAMEs to a Springshare-operated
+    CloudFront distribution; Caltech is site_id 64 on Springshare's shared platform. The content and the
+    tenancy are Caltech's; the contract is Springshare's. The generic vendor API at lgapi-us.libapps.com
+    (verified 401 without a key) is NOT saved under this institution — it belongs to Springshare's own
+    repo.
+  description: 'Caltech Library''s discovery and research-guide layer runs on Springshare LibGuides/LibApps
+    rather than on institution-operated software. Recorded as a real institutional relationship — one
+    of the few programmable surfaces most universities have — with no vendor specification saved under
+    Caltech''s slug. Verified live 2026-08-19: libguides.caltech.edu 200, caltech.libapps.com 200.'
   humanURL: https://libguides.caltech.edu/
   baseURL: https://libguides.caltech.edu/
   tags:
@@ -278,16 +266,14 @@ apis:
 - aid: caltech:ebsco-resolver
   name: EBSCO Link Resolver (Caltech instance)
   x-operator: tenant
-  x-operator-rationale: >-
-    Caltech holds instance `l7ubco` on EBSCO's shared resolver host. The host is the vendor's and is shared
-    by every customer; only the instance is Caltech's.
-  description: >-
-    Caltech Library's OpenURL link resolver is an EBSCO tenancy — instance `l7ubco` on the shared host
-    resolver.ebsco.com — referenced from Caltech's own library pages. Recorded as a relationship only
-    — no EBSCO contract is saved under this institution. No baseURL is emitted: the resolver returns 404/400
-    to requests without OpenURL parameters, so the endpoint could not be confirmed by a clean 200 and
-    a dead pointer would read as a claim. Confidence medium — the instance is evidenced only from Caltech's
-    own markup.
+  x-operator-rationale: Caltech holds instance `l7ubco` on EBSCO's shared resolver host. The host is the
+    vendor's and is shared by every customer; only the instance is Caltech's.
+  description: 'Caltech Library''s OpenURL link resolver is an EBSCO tenancy — instance `l7ubco` on the
+    shared host resolver.ebsco.com — referenced from Caltech''s own library pages. Recorded as a relationship
+    only — no EBSCO contract is saved under this institution. No baseURL is emitted: the resolver returns
+    404/400 to requests without OpenURL parameters, so the endpoint could not be confirmed by a clean
+    200 and a dead pointer would read as a claim. Confidence medium — the instance is evidenced only from
+    Caltech''s own markup.'
   humanURL: https://library.caltech.edu/search
   tags:
   - Library
@@ -392,129 +378,123 @@ apis:
   - type: Documentation
     url: https://service.scedc.caltech.edu/
 common:
-  - type: Website
-    url: https://www.caltech.edu/
-  - type: Blog
-    url: https://www.caltech.edu/about/news
-  - type: BlogRSS
-    url: https://www.caltech.edu/about/news/rss
-  - type: PrivacyPolicy
-    url: https://www.caltech.edu/privacy-notice
-  - type: LinkedIn
-    url: https://www.linkedin.com/school/california-institute-of-technology/
-  - type: GitHubOrganization
-    url: https://github.com/caltechlibrary
-  - type: GitHubOrganization
-    url: https://github.com/Caltech-IPAC
-  - type: OpenData
-    url: https://data.caltech.edu/
-  - type: ResearchRepository
-    url: https://data.caltech.edu/
-  - type: ResearchRepository
-    url: https://authors.library.caltech.edu/
-  - type: IdentityFederation
-    url: https://mdq.incommon.org/entities/https%3A%2F%2Fidp.caltech.edu%2Fidp%2Fshibboleth
-  - type: CourseCatalog
-    url: https://catalog.caltech.edu/
-  - type: ResearchComputing
-    url: https://hpc.caltech.edu/
-  - type: AIPolicy
-    url: https://www.imss.caltech.edu/services/ai
-  - type: Support
-    url: https://library.caltech.edu/
-  - type: OpenAPI
-    url: openapi/caltech-caltechdata-openapi.yml
-  - type: OpenAPI
-    url: openapi/caltech-scedc-fdsn-openapi.yml
-  - type: JSONSchema
-    url: json-schema/caltech-caltechdata-record-schema.json
-  - type: JSONSchema
-    url: json-schema/caltech-library-feeds-person-schema.json
-  - type: Conformance
-    url: conformance/caltech-education-standards.yml
-  - type: Authentication
-    url: authentication/caltech-authentication.yml
-  - type: Errors
-    url: errors/caltech-errors.yml
-  - type: Lifecycle
-    url: lifecycle/caltech-lifecycle.yml
-  - type: Vocabulary
-    url: vocabulary/caltech-vocabulary.yml
-  - type: Rules
-    url: rules/caltech-rules.yml
-  - type: JSONLD
-    url: json-ld/caltech-context.jsonld
-  - type: DomainSecurity
-    url: security/caltech-domain-security.yml
-  - type: Plans
-    url: plans/caltech-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/caltech-rate-limits.yml
-  - type: FinOps
-    url: finops/caltech-finops.yml
-  - type: Review
-    url: review.yml
-
+- type: Website
+  url: https://www.caltech.edu/
+- type: Blog
+  url: https://www.caltech.edu/about/news
+- type: BlogRSS
+  url: https://www.caltech.edu/about/news/rss
+- type: PrivacyPolicy
+  url: https://www.caltech.edu/privacy-notice
+- type: LinkedIn
+  url: https://www.linkedin.com/school/california-institute-of-technology/
+- type: GitHubOrganization
+  url: https://github.com/caltechlibrary
+- type: GitHubOrganization
+  url: https://github.com/Caltech-IPAC
+- type: OpenData
+  url: https://data.caltech.edu/
+- type: ResearchRepository
+  url: https://data.caltech.edu/
+- type: ResearchRepository
+  url: https://authors.library.caltech.edu/
+- type: IdentityFederation
+  url: https://mdq.incommon.org/entities/https%3A%2F%2Fidp.caltech.edu%2Fidp%2Fshibboleth
+- type: CourseCatalog
+  url: https://catalog.caltech.edu/
+- type: ResearchComputing
+  url: https://hpc.caltech.edu/
+- type: AIPolicy
+  url: https://www.imss.caltech.edu/services/ai
+- type: Support
+  url: https://library.caltech.edu/
+- type: OpenAPI
+  url: openapi/_original/caltech-caltechdata-openapi.yml
+- type: OpenAPI
+  url: openapi/_original/caltech-scedc-fdsn-openapi.yml
+- type: JSONSchema
+  url: json-schema/caltech-caltechdata-record-schema.json
+- type: JSONSchema
+  url: json-schema/caltech-library-feeds-person-schema.json
+- type: Conformance
+  url: conformance/caltech-education-standards.yml
+- type: Authentication
+  url: authentication/caltech-authentication.yml
+- type: Errors
+  url: errors/caltech-errors.yml
+- type: Lifecycle
+  url: lifecycle/caltech-lifecycle.yml
+- type: Vocabulary
+  url: vocabulary/caltech-vocabulary.yml
+- type: Rules
+  url: rules/caltech-rules.yml
+- type: JSONLD
+  url: json-ld/caltech-context.jsonld
+- type: DomainSecurity
+  url: security/caltech-domain-security.yml
+- type: Plans
+  url: plans/caltech-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/caltech-rate-limits.yml
+- type: FinOps
+  url: finops/caltech-finops.yml
+- type: Review
+  url: review.yml
 x-coverage:
   state: covered
   reason: institution_operated_surfaces_verified
   generated: '2026-08-19'
   method: probed
-  detail: >-
-    Nine institution-operated surfaces and two vendor tenancies were settled by live
-    probe on 2026-08-19, with no vendor contract saved under Caltech's slug. Caltech is
-    an outlier in this cohort: its research surfaces really are its own, self-hosted on
-    caltech.edu, rather than a Figshare or Pure tenancy misread as institutional. Real
-    absences confirmed, not assumed: no central developer portal (api.caltech.edu and
-    developer.caltech.edu both fail DNS resolution), no Caltech-published OpenAPI for any
-    surface, no llms.txt (404), no .well-known/security.txt (404), no status page, no
-    published deprecation policy or changelog, no OAuth authorization server, no
-    documented scope vocabulary, and no machine-readable course-catalog interface behind
-    catalog.caltech.edu. Seven of the twelve education-regime domain standards were
-    probed and not found (scim, lti, oneroster, ed-fi, caliper, qti, crossref); five were
-    confirmed inside live contracts (shibboleth, saml, oai-pmh, datacite, orcid). Two
-    partial blocks encountered and recorded as findings rather than gaps: scedc.caltech.edu
-    documentation pages return 403 to non-browser clients while the data services return
-    200, and www.caltech.edu/about/news returns 403 while its Atom feed returns 200.
-    CaltechAUTHORS returned intermittent 522 between successful calls.
+  detail: 'Nine institution-operated surfaces and two vendor tenancies were settled by live probe on 2026-08-19,
+    with no vendor contract saved under Caltech''s slug. Caltech is an outlier in this cohort: its research
+    surfaces really are its own, self-hosted on caltech.edu, rather than a Figshare or Pure tenancy misread
+    as institutional. Real absences confirmed, not assumed: no central developer portal (api.caltech.edu
+    and developer.caltech.edu both fail DNS resolution), no Caltech-published OpenAPI for any surface,
+    no llms.txt (404), no .well-known/security.txt (404), no status page, no published deprecation policy
+    or changelog, no OAuth authorization server, no documented scope vocabulary, and no machine-readable
+    course-catalog interface behind catalog.caltech.edu. Seven of the twelve education-regime domain standards
+    were probed and not found (scim, lti, oneroster, ed-fi, caliper, qti, crossref); five were confirmed
+    inside live contracts (shibboleth, saml, oai-pmh, datacite, orcid). Two partial blocks encountered
+    and recorded as findings rather than gaps: scedc.caltech.edu documentation pages return 403 to non-browser
+    clients while the data services return 200, and www.caltech.edu/about/news returns 403 while its Atom
+    feed returns 200. CaltechAUTHORS returned intermittent 522 between successful calls.'
   evidence:
-    - url: https://data.caltech.edu/api/records?size=1
-      status: 200
-    - url: https://data.caltech.edu/oai2d?verb=Identify
-      status: 200
-    - url: https://authors.library.caltech.edu/api/records?size=1
-      status: 200
-    - url: https://feeds.library.caltech.edu/people/people_list.json
-      status: 200
-    - url: https://service.scedc.caltech.edu/fdsnws/event/1/query?starttime=2026-08-01&endtime=2026-08-05&minmagnitude=3&format=text
-      status: 200
-    - url: https://service.scedc.caltech.edu/fdsnws/station/1/query?net=CI&sta=PAS&level=station&format=text
-      status: 200
-    - url: https://irsa.ipac.caltech.edu/TAP/sync?QUERY=SELECT+TOP+2+*+FROM+TAP_SCHEMA.tables&FORMAT=csv
-      status: 200
-    - url: https://ned.ipac.caltech.edu/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+table_name+FROM+TAP_SCHEMA.tables
-      status: 200
-    - url: https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+top+2+pl_name+from+ps&format=csv
-      status: 200
-    - url: https://idp.caltech.edu/idp/shibboleth
-      status: 200
-    - url: https://mdq.incommon.org/entities/https%3A%2F%2Fidp.caltech.edu%2Fidp%2Fshibboleth
-      status: 200
-    - url: https://libguides.caltech.edu/
-      status: 200
-    - url: https://lgapi-us.libapps.com/1.2/guides?site_id=64
-      status: 401
-    - url: https://www.caltech.edu/llms.txt
-      status: 404
-    - url: https://www.caltech.edu/.well-known/security.txt
-      status: 404
-    - url: https://scedc.caltech.edu/data/web-services.html
-      status: 403
-    - url: https://www.caltech.edu/about/news
-      status: 403
-    - url: https://www.caltech.edu/about/news/rss
-      status: 200
-
+  - url: https://data.caltech.edu/api/records?size=1
+    status: 200
+  - url: https://data.caltech.edu/oai2d?verb=Identify
+    status: 200
+  - url: https://authors.library.caltech.edu/api/records?size=1
+    status: 200
+  - url: https://feeds.library.caltech.edu/people/people_list.json
+    status: 200
+  - url: https://service.scedc.caltech.edu/fdsnws/event/1/query?starttime=2026-08-01&endtime=2026-08-05&minmagnitude=3&format=text
+    status: 200
+  - url: https://service.scedc.caltech.edu/fdsnws/station/1/query?net=CI&sta=PAS&level=station&format=text
+    status: 200
+  - url: https://irsa.ipac.caltech.edu/TAP/sync?QUERY=SELECT+TOP+2+*+FROM+TAP_SCHEMA.tables&FORMAT=csv
+    status: 200
+  - url: https://ned.ipac.caltech.edu/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+table_name+FROM+TAP_SCHEMA.tables
+    status: 200
+  - url: https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+top+2+pl_name+from+ps&format=csv
+    status: 200
+  - url: https://idp.caltech.edu/idp/shibboleth
+    status: 200
+  - url: https://mdq.incommon.org/entities/https%3A%2F%2Fidp.caltech.edu%2Fidp%2Fshibboleth
+    status: 200
+  - url: https://libguides.caltech.edu/
+    status: 200
+  - url: https://lgapi-us.libapps.com/1.2/guides?site_id=64
+    status: 401
+  - url: https://www.caltech.edu/llms.txt
+    status: 404
+  - url: https://www.caltech.edu/.well-known/security.txt
+    status: 404
+  - url: https://scedc.caltech.edu/data/web-services.html
+    status: 403
+  - url: https://www.caltech.edu/about/news
+    status: 403
+  - url: https://www.caltech.edu/about/news/rss
+    status: 200
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
