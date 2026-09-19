@@ -226,6 +226,13 @@ apis:
   - SAML
   - InCommon
   - eduGAIN
+  - SSO
+  tags_raw:
+  - Identity Federation
+  - Shibboleth
+  - SAML
+  - InCommon
+  - eduGAIN
   - Single Sign-On
   properties:
   - type: Metadata
@@ -259,6 +266,12 @@ apis:
   - Research Guides
   - Springshare
   - LibGuides
+  - Tenants
+  tags_raw:
+  - Library
+  - Research Guides
+  - Springshare
+  - LibGuides
   - Tenant
   properties:
   - type: Documentation
@@ -276,6 +289,12 @@ apis:
     Caltech''s own markup.'
   humanURL: https://library.caltech.edu/search
   tags:
+  - Library
+  - Link Resolver
+  - OpenURL
+  - EBSCO
+  - Tenants
+  tags_raw:
   - Library
   - Link Resolver
   - OpenURL
