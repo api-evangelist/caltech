@@ -1,0 +1,91 @@
+---
+aid: caltech
+name: California Institute of Technology — Error Semantics
+generated: '2026-08-19'
+method: probed
+description: >-
+  Error behaviour observed by deliberately malforming requests against Caltech-operated
+  surfaces on 2026-08-19. Every entry below is a response actually received.
+source:
+  - https://data.caltech.edu/api/records/zzzzz-zzzzz
+  - https://data.caltech.edu/oai2d?verb=Bogus
+  - https://service.scedc.caltech.edu/fdsnws/event/1/query?starttime=NOTADATE&format=text
+  - https://ned.ipac.caltech.edu/tap/sync
+
+surfaces:
+  - surface: CaltechDATA REST API
+    x-operator: institution
+    content_type: application/json
+    machine_readable: true
+    shape:
+      status: integer
+      message: string
+    observed:
+      - request: GET https://data.caltech.edu/api/records/zzzzz-zzzzz
+        status: 404
+        body: '{"status": 404, "message": "The persistent identifier does not exist."}'
+    assessment: >-
+      Structured JSON error with a numeric status and a human-readable message. No error
+      code vocabulary, no problem+json (RFC 9457), no documentation link in the body.
+
+  - surface: CaltechDATA / CaltechAUTHORS OAI-PMH
+    x-operator: institution
+    content_type: text/xml
+    machine_readable: true
+    shape:
+      element: 'OAI-PMH/error[@code]'
+    observed:
+      - request: GET https://data.caltech.edu/oai2d?verb=Bogus
+        status: 200
+        body: '<error code="badArgument">This is not a valid OAI-PMH verb:Bogus</error>'
+    assessment: >-
+      Spec-conformant OAI-PMH error codes. Note the protocol returns HTTP 200 with an
+      error element in the body — correct per OAI-PMH, but it means HTTP status alone is
+      not a success signal on this surface.
+
+  - surface: SCEDC FDSN Web Services
+    x-operator: institution
+    content_type: text/plain
+    machine_readable: partial
+    observed:
+      - request: GET /fdsnws/event/1/query?starttime=NOTADATE&format=text
+        status: 400
+        body: |
+          Error 400: doIrisProcessing - Bad date value for starttime: NOTADATE
+          Request: ...
+          Request Submitted: 2026/08/19 21:08:19 UTC
+          Service version: Service: fdsnws-event  version: 1.1.1
+      - request: GET /fdsnws/dataselect/1/query (window with no data)
+        status: 204
+        body: ''
+    assessment: >-
+      FDSN-standard behaviour: 204 for an empty result set rather than an empty 200, and
+      400 for a malformed parameter. The 400 body is plain text — parseable by convention
+      but not a structured error document. It usefully echoes the submitted request, a
+      timestamp and the service version, which makes failures reproducible.
+
+  - surface: IVOA TAP services (IRSA, NED, NASA Exoplanet Archive)
+    x-operator: institution
+    content_type: application/xml (VOTable)
+    machine_readable: true
+    observed:
+      - request: GET https://ned.ipac.caltech.edu/tap/sync (missing REQUEST parameter)
+        status: 400
+        body_elements:
+          QUERY_STATUS: 'ERROR — The parameter "request" must be provided and its value must be equal to "doQuery" or "getCapabilities"!'
+          PROVIDER: 'NASA/IPAC Extragalactic Database (NED)'
+          REQ_ID: S1787173473711
+          ERROR_TYPE: fatal
+          ACTION: sync
+    assessment: >-
+      The strongest error semantics in Caltech's estate. VOTable INFO elements carry a
+      machine-readable QUERY_STATUS, an error severity, the provider identity and a
+      request id suitable for support correlation — all per the IVOA DALI specification.
+
+gaps:
+  - No RFC 9457 problem+json anywhere in the estate.
+  - No published error-code reference for any surface.
+  - No documented retry or backoff guidance.
+  - Error shape differs per surface (JSON, OAI-PMH XML, plain text, VOTable), which is
+    expected given four independent operators inside one institution but means no single
+    client contract covers Caltech.

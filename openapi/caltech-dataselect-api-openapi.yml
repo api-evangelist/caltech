@@ -1,9 +1,9 @@
 openapi: 3.2.0
 info:
-  title: SCEDC FDSN Web Services (Caltech Seismological Laboratory) Data Select API
+  title: SCEDC FDSN Web Services (Caltech Seismological Laboratory)…
   version: 1.1.1
   summary: FDSN-standard seismic web services operated by the Southern California Earthquake Data Center at the Caltech Seismological Laboratory.
-  description: The Southern California Earthquake Data Center (SCEDC) is operated by the Seismological Laboratory at the California Institute of Technology, on Caltech's own `caltech.edu` domain and Caltech-run infrastructure (service.scedc.caltech.edu resolves inside Caltech address space). It implements the International Federation of Digital Seismograph Networks (FDSN) web service specification — `fdsnws-event`, `fdsnws-station` and `fdsnws-dataselect`. This is genuinely institution-operated research infrastructure, not a vendor platform running under Caltech's name. This document is DERIVED by API Evangelist from live, unauthenticated probes; SCEDC publishes a WADL per service but no OpenAPI. Only operations actually observed returning data are described.
+  description: The Southern California Earthquake Data Center (SCEDC) is operated by the Seismological Laboratory at the California Institute of Technology, on Caltech's own `caltech.edu` domain and Caltech-run infrastructure (service.scedc.caltech.edu resolves inside Caltech address space).
   contact:
     name: Southern California Earthquake Data Center, Caltech Seismological Laboratory
     url: https://scedc.caltech.edu/

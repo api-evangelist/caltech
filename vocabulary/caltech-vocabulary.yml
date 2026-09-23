@@ -1,0 +1,113 @@
+---
+aid: caltech
+name: California Institute of Technology — Surface Vocabulary
+generated: '2026-08-19'
+method: derived
+source:
+  - https://data.caltech.edu/api/records?size=1
+  - https://data.caltech.edu/oai2d?verb=ListMetadataFormats
+  - https://service.scedc.caltech.edu/fdsnws/station/1/query
+  - https://irsa.ipac.caltech.edu/TAP/capabilities
+  - https://feeds.library.caltech.edu/people/people_list.json
+description: >-
+  The terms that actually appear in Caltech-operated contracts and responses. Caltech
+  publishes no institution-wide vocabulary; this is derived from observed payloads. Note
+  that the institution has FOUR independent vocabularies, one per operating unit, with no
+  shared term between them — a direct consequence of a federated institution where the
+  Library, the Seismological Laboratory and IPAC each engineer separately.
+
+domains:
+
+  - domain: Research data (CaltechDATA / CaltechAUTHORS, Caltech Library)
+    standard_basis: InvenioRDM record model, DataCite 4, Dublin Core, DCAT, MARC21
+    terms:
+      - term: record
+        meaning: A published deposit — dataset, software, thesis or publication metadata.
+      - term: pids
+        meaning: Persistent identifiers block carrying the DOI and the OAI identifier.
+      - term: doi
+        meaning: DataCite DOI under Caltech's own prefix 10.22002.
+      - term: creators / contributors
+        meaning: Attributed people or organizations, with typed identifiers (ORCID, ROR).
+      - term: resource_type
+        meaning: Controlled deposit type.
+      - term: access
+        meaning: Access rights block governing record and file visibility.
+      - term: custom_fields
+        meaning: 'Caltech-specific extensions, observed: journal:journal, caltech:groups, caltech:publication_status.'
+    metadata_formats_advertised:
+      - oai_dc
+      - dcat
+      - marc21
+      - marcxml
+      - datacite
+      - oai_datacite
+      - datacite4
+      - oai_datacite4
+
+  - domain: Seismology (SCEDC, Caltech Seismological Laboratory)
+    standard_basis: FDSN Web Services 1.1, StationXML, QuakeML, miniSEED
+    terms:
+      - term: net
+        meaning: Network code. `CI` is the California Integrated Seismic Network, Southern California.
+      - term: sta
+        meaning: Station code, e.g. `PAS` (Pasadena).
+      - term: cha
+        meaning: Channel code, e.g. `BHZ`.
+      - term: loc
+        meaning: Location code; `--` denotes blank.
+      - term: EventID
+        meaning: SCEDC catalog event identifier.
+      - term: MagType
+        meaning: 'Magnitude scale code, observed: h (local, historic), w (moment).'
+      - term: ET
+        meaning: 'Event type, observed: eq (earthquake).'
+      - term: GT
+        meaning: 'Geographic type / location quality flag, observed: r, t.'
+      - term: Catalog
+        meaning: Source catalog, `SCEDC`.
+
+  - domain: Astronomy (IRSA, NED, NASA Exoplanet Archive — Caltech/IPAC)
+    standard_basis: IVOA — TAP, ADQL, VOTable, VOSI, DALI, SCS, SIA v2
+    terms:
+      - term: TAP
+        meaning: Table Access Protocol — ADQL query interface over archive catalogs.
+      - term: sync / async
+        meaning: TAP execution modes.
+      - term: ADQL
+        meaning: Astronomical Data Query Language, the SQL dialect TAP accepts.
+      - term: VOTable
+        meaning: The IVOA XML result and error serialization.
+      - term: TAP_SCHEMA
+        meaning: Self-describing catalog of the tables a TAP service exposes.
+      - term: QUERY_STATUS
+        meaning: VOTable INFO element carrying OK or ERROR.
+      - term: SCS
+        meaning: Simple Cone Search — positional catalog query.
+      - term: SIA
+        meaning: Simple Image Access — image discovery.
+    capabilities_declared:
+      - ivo://ivoa.net/std/VOSI#capabilities
+      - ivo://ivoa.net/std/VOSI#availability
+      - ivo://ivoa.net/std/VOSI#tables
+      - ivo://ivoa.net/std/DALI#examples
+      - ivo://ivoa.net/std/TAP
+
+  - domain: Identity (IMSS)
+    standard_basis: SAML 2.0, Shibboleth, InCommon / eduGAIN metadata
+    terms:
+      - term: entityID
+        meaning: 'https://idp.caltech.edu/idp/shibboleth — Caltech''s federation identity.'
+      - term: Scope
+        meaning: '`caltech.edu` — the domain over which the IdP asserts scoped attributes.'
+      - term: IDPSSODescriptor
+        meaning: The SSO role advertised by the identity provider.
+      - term: AttributeAuthorityDescriptor
+        meaning: The attribute query role, reachable over SOAP.
+      - term: registrationAuthority
+        meaning: '`https://incommon.org` — the federation that registered the entity.'
+
+observation: >-
+  There is no cross-cutting Caltech vocabulary and no institution-wide identifier that
+  joins a person across CaltechDATA, CaltechAUTHORS and Caltech Library Feeds other than
+  ORCID. ORCID is the de facto join key across Caltech's research surfaces.

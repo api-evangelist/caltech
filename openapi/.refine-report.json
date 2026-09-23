@@ -1,0 +1,31 @@
+{
+  "provider": "caltech",
+  "sources": [
+    "_original/caltech-caltechdata-openapi.yml",
+    "_original/caltech-scedc-fdsn-openapi.yml"
+  ],
+  "outputs": [
+    "caltech-records-api-openapi.yml",
+    "caltech-dataselect-api-openapi.yml",
+    "caltech-event-api-openapi.yml",
+    "caltech-station-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "2 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "caltech-caltechdata-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "caltech-scedc-fdsn-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/caltech-scedc-fdsn-openapi_2.yml: archived document superseded by a larger archived document",
+    "_original/caltech-caltechdata-openapi_2.yml: archived document superseded by a larger archived document",
+    "caltech-dataselect-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "caltech-event-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "caltech-records-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "caltech-station-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

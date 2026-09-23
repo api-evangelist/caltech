@@ -1,0 +1,90 @@
+---
+aid: caltech
+name: California Institute of Technology — Surface Lifecycle
+generated: '2026-08-19'
+method: probed
+source:
+  - https://service.scedc.caltech.edu/fdsnws/station/1/version
+  - https://service.scedc.caltech.edu/fdsnws/event/1/version
+  - https://service.scedc.caltech.edu/fdsnws/dataselect/1/version
+  - https://irsa.ipac.caltech.edu/TAP/capabilities
+  - https://data.caltech.edu/api/records?size=1
+  - https://mdq.incommon.org/entities/https%3A%2F%2Fidp.caltech.edu%2Fidp%2Fshibboleth
+  - https://feeds.library.caltech.edu/
+description: >-
+  Versioning and change posture across Caltech-operated surfaces. Caltech publishes no
+  institution-wide API changelog, deprecation policy or status page; the versioning that
+  exists is inherited from the community standards each unit implements.
+
+surfaces:
+  - surface: SCEDC FDSN Web Services
+    x-operator: institution
+    versioning: path + version endpoint
+    version_scheme: 'FDSN major.minor.patch, exposed at /fdsnws/<service>/1/version'
+    observed_versions:
+      fdsnws-station: 1.1.0
+      fdsnws-event: 1.1.1
+      fdsnws-dataselect: 1.1.0
+    verified: '2026-08-19'
+    assessment: >-
+      The best-versioned surface in the estate. The major version is in the path, the
+      running patch version is machine-readable at a dedicated endpoint, and the version
+      is echoed inside 400 error bodies. All of this is FDSN's design, not Caltech's.
+    deprecation_policy: not_found
+    changelog: not_found
+
+  - surface: IVOA TAP services (IRSA, NED, NASA Exoplanet Archive)
+    x-operator: institution
+    versioning: capability document
+    version_scheme: 'IVOA standardID URIs declared in /capabilities'
+    verified: '2026-08-19 — capabilities returned 200 application/xml'
+    assessment: >-
+      Self-describing: a client discovers supported standards and their versions from the
+      VOSI capabilities document, plus table structure from TAP_SCHEMA and worked queries
+      from the DALI examples endpoint. Discoverable without documentation.
+    deprecation_policy: not_found
+    changelog: not_found
+
+  - surface: CaltechDATA / CaltechAUTHORS REST API
+    x-operator: institution
+    versioning: none_exposed
+    version_scheme: >-
+      No version in the path (`/api/records`), no version header observed, no version
+      field in the response. The API surface tracks whatever InvenioRDM release the
+      Library is running, which is not disclosed on the public surface.
+    record_level_versioning: >-
+      Individual records ARE versioned — each record carries `revision_id`, `versions`
+      and a `parent` linking version chains, and every version gets its own DataCite DOI.
+      Caltech versions its DATA well and its API not at all.
+    verified: '2026-08-19'
+    deprecation_policy: not_found
+    changelog: not_found
+
+  - surface: Caltech Shibboleth IdP metadata
+    x-operator: institution
+    versioning: metadata validity window
+    version_scheme: 'EntityDescriptor/@validUntil'
+    observed: 'validUntil 2026-09-02T20:37:10Z on the InCommon-signed copy'
+    verified: '2026-08-19'
+    assessment: >-
+      Federation metadata expires and is re-signed on a rolling window — a real, enforced
+      freshness contract, and the only expiry-bearing artifact Caltech publishes.
+
+  - surface: Caltech Library Feeds
+    x-operator: institution
+    versioning: service version in prose
+    observed: 'Feeds v1.6, stated on the service homepage'
+    verified: '2026-08-19'
+    deprecation_policy: not_found
+    changelog: not_found
+
+estate_level:
+  status_page: not_found
+  note_status: >-
+    No status page found for any Caltech data surface. Relevant: CaltechAUTHORS returned
+    intermittent HTTP 522 during probing on 2026-08-19, and there is no public surface on
+    which a consumer could confirm that as an incident.
+  deprecation_policy: not_found
+  changelog: not_found
+  support_channel: per-unit only (Caltech Library, SCEDC, IRSA helpdesks); no estate-wide developer support
+  sunset_headers: not_observed

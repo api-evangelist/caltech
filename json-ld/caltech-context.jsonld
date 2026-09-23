@@ -10,41 +10,27 @@
     "sameAs": "schema:sameAs",
     "logo": "schema:logo",
     "address": "schema:address",
-
     "CollegeOrUniversity": "schema:CollegeOrUniversity",
     "Dataset": "schema:Dataset",
     "DataCatalog": "schema:DataCatalog",
     "Organization": "schema:Organization",
-
+    "WebAPI": "schema:WebAPI",
     "api": "caltech:api",
-    "baseURL": {
-      "@id": "caltech:baseURL",
-      "@type": "@id"
-    },
-    "humanURL": {
-      "@id": "caltech:humanURL",
-      "@type": "@id"
-    },
+    "operator": "caltech:operator",
+    "baseURL": { "@id": "caltech:baseURL", "@type": "@id" },
+    "humanURL": { "@id": "caltech:humanURL", "@type": "@id" },
+    "conformsTo": { "@id": "schema:isBasedOn", "@type": "@id" },
     "record": "caltech:record",
-    "doi": {
-      "@id": "caltech:doi",
-      "@type": "@id"
-    },
+    "doi": { "@id": "caltech:doi", "@type": "@id" },
     "metadata": "caltech:metadata",
     "files": "caltech:files",
-    "created": {
-      "@id": "schema:dateCreated",
-      "@type": "schema:Date"
-    },
-    "updated": {
-      "@id": "schema:dateModified",
-      "@type": "schema:Date"
-    }
+    "created": { "@id": "schema:dateCreated", "@type": "schema:Date" },
+    "updated": { "@id": "schema:dateModified", "@type": "schema:Date" }
   },
   "@type": "CollegeOrUniversity",
   "name": "California Institute of Technology",
   "url": "https://www.caltech.edu/",
-  "description": "Private research university in Pasadena, California. Its public, machine-readable footprint is concentrated in research-data (CaltechDATA on InvenioRDM) and astronomy (NASA/IPAC Infrared Science Archive Virtual Observatory) infrastructure.",
+  "description": "Private research university in Pasadena, California. Its public machine-readable footprint is genuinely institution-operated rather than vendor-attributed: self-hosted research repositories (CaltechDATA and CaltechAUTHORS on InvenioRDM), the Caltech Seismological Laboratory's SCEDC FDSN web services, three Caltech/IPAC NASA astronomy archives behind IVOA interfaces, and a Shibboleth identity provider registered in InCommon. No central developer portal and no Caltech-published OpenAPI.",
   "logo": "https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg",
   "sameAs": [
     "https://github.com/caltechlibrary",
@@ -57,27 +43,101 @@
     "addressRegion": "CA",
     "addressCountry": "US"
   },
+  "_provenance": {
+    "generated": "2026-08-19",
+    "method": "derived",
+    "source": "apis.yml — surfaces verified by live probe 2026-08-19",
+    "note": "operator values mirror apis.yml x-operator. 'tenant' means the data is Caltech's and the contract is the vendor's."
+  },
   "api": [
     {
       "@type": "DataCatalog",
       "name": "CaltechDATA REST API",
+      "operator": "institution",
       "humanURL": "https://caltechlibrary.github.io/caltechdata_api/",
       "baseURL": "https://data.caltech.edu/api/records",
-      "description": "Public REST API for CaltechDATA, the Caltech institutional research data repository built on InvenioRDM."
+      "description": "Public REST API for CaltechDATA, the Caltech institutional research data repository on self-hosted InvenioRDM. DataCite DOIs under Caltech's own 10.22002 prefix; ORCID iDs on creators."
     },
     {
       "@type": "DataCatalog",
       "name": "CaltechDATA OAI-PMH",
+      "operator": "institution",
       "humanURL": "https://data.caltech.edu/",
       "baseURL": "https://data.caltech.edu/oai2d",
-      "description": "OAI-PMH metadata harvesting endpoint for CaltechDATA."
+      "conformsTo": "https://www.openarchives.org/OAI/openarchivesprotocol.html",
+      "description": "OAI-PMH 2.0 metadata harvesting endpoint, advertising datacite, datacite4, dcat, marc21 and oai_dc formats."
     },
     {
       "@type": "DataCatalog",
-      "name": "IRSA Virtual Observatory APIs (IPAC)",
+      "name": "CaltechAUTHORS REST API and OAI-PMH",
+      "operator": "institution",
+      "humanURL": "https://authors.library.caltech.edu/",
+      "baseURL": "https://authors.library.caltech.edu/api/records",
+      "description": "Caltech's institutional publications repository on self-hosted InvenioRDM, carrying ORCID and ROR identifiers."
+    },
+    {
+      "@type": "Dataset",
+      "name": "Caltech Library Feeds",
+      "operator": "institution",
+      "humanURL": "https://feeds.library.caltech.edu/",
+      "baseURL": "https://feeds.library.caltech.edu/",
+      "description": "Caltech Library metadata service publishing JSON datasets harvested from its repositories, directory and archives — including 3,885 person records carrying ORCID iDs."
+    },
+    {
+      "@type": "WebAPI",
+      "name": "SCEDC FDSN Web Services",
+      "operator": "institution",
+      "humanURL": "https://scedc.caltech.edu/",
+      "baseURL": "https://service.scedc.caltech.edu/fdsnws",
+      "conformsTo": "https://www.fdsn.org/webservices/",
+      "description": "Southern California Earthquake Data Center seismic web services (fdsnws-event, fdsnws-station, fdsnws-dataselect), operated by the Caltech Seismological Laboratory."
+    },
+    {
+      "@type": "DataCatalog",
+      "name": "IRSA Virtual Observatory APIs (Caltech/IPAC)",
+      "operator": "institution",
       "humanURL": "https://irsa.ipac.caltech.edu/voapi.html",
       "baseURL": "https://irsa.ipac.caltech.edu/TAP",
-      "description": "Caltech/IPAC NASA Infrared Science Archive IVOA-standard Virtual Observatory APIs (TAP, SCS, SIA)."
+      "description": "NASA/IPAC Infrared Science Archive IVOA interfaces — TAP, Simple Cone Search and Simple Image Access v2."
+    },
+    {
+      "@type": "DataCatalog",
+      "name": "NED Table Access Protocol (Caltech/IPAC)",
+      "operator": "institution",
+      "humanURL": "https://ned.ipac.caltech.edu/Documents/Guides/Interface/TAP",
+      "baseURL": "https://ned.ipac.caltech.edu/tap",
+      "description": "NASA/IPAC Extragalactic Database IVOA TAP service, with spec-conformant VOTable error documents."
+    },
+    {
+      "@type": "DataCatalog",
+      "name": "NASA Exoplanet Archive TAP (Caltech/IPAC)",
+      "operator": "institution",
+      "humanURL": "https://exoplanetarchive.ipac.caltech.edu/docs/program_interfaces.html",
+      "baseURL": "https://exoplanetarchive.ipac.caltech.edu/TAP",
+      "description": "NASA Exoplanet Archive IVOA TAP service over confirmed-planet and related tables."
+    },
+    {
+      "@type": "WebAPI",
+      "name": "Caltech Shibboleth Identity Provider (InCommon)",
+      "operator": "institution",
+      "humanURL": "https://www.imss.caltech.edu/",
+      "baseURL": "https://idp.caltech.edu/idp/shibboleth",
+      "description": "Caltech's SAML 2.0 / Shibboleth identity provider, scope caltech.edu, registered in the InCommon federation and reachable through eduGAIN."
+    },
+    {
+      "@type": "WebAPI",
+      "name": "Caltech Library Guides (Springshare tenancy)",
+      "operator": "tenant",
+      "humanURL": "https://libguides.caltech.edu/",
+      "baseURL": "https://libguides.caltech.edu/",
+      "description": "Caltech Library's discovery and research-guide layer runs on Springshare LibGuides. The tenancy and content are Caltech's; the contract is Springshare's and is not saved under Caltech."
+    },
+    {
+      "@type": "WebAPI",
+      "name": "EBSCO Link Resolver (Caltech instance)",
+      "operator": "tenant",
+      "humanURL": "https://library.caltech.edu/search",
+      "description": "Caltech Library's OpenURL link resolver is an EBSCO tenancy (instance l7ubco) on a shared vendor host."
     }
   ]
 }

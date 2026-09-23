@@ -3,7 +3,7 @@ info:
   title: CaltechDATA REST Records API
   version: 1.0.0
   summary: Public read API for CaltechDATA, the Caltech institutional research data repository.
-  description: CaltechDATA (https://data.caltech.edu) is the California Institute of Technology's institutional research data repository, operated by the Caltech Library on the institution's own `caltech.edu` domain. The repository software is InvenioRDM, an open-source platform (CERN/InvenioRDM community) that Caltech Library self-hosts — it is NOT a hosted vendor tenancy, so the operator of this surface is the institution. This document is DERIVED by API Evangelist from live, unauthenticated probes of the public endpoints; Caltech does not publish an OpenAPI description of its own. Only operations actually observed returning data are described here.
+  description: CaltechDATA (https://data.caltech.edu) is the California Institute of Technology's institutional research data repository, operated by the Caltech Library on the institution's own `caltech.edu` domain.
   contact:
     name: Caltech Library
     url: https://library.caltech.edu/
@@ -131,6 +131,18 @@ components:
           type: object
           additionalProperties:
             type: string
+    Error:
+      type: object
+      description: Observed error body shape, verified on a 404.
+      properties:
+        status:
+          type: integer
+          examples:
+          - 404
+        message:
+          type: string
+          examples:
+          - The persistent identifier does not exist.
     RecordMetadata:
       type: object
       properties:
@@ -150,6 +162,25 @@ components:
           type: array
           items:
             type: object
+    RecordSearchResult:
+      type: object
+      properties:
+        hits:
+          type: object
+          properties:
+            hits:
+              type: array
+              items:
+                $ref: '#/components/schemas/Record'
+            total:
+              type: integer
+        links:
+          type: object
+          additionalProperties:
+            type: string
+            format: uri
+        sortBy:
+          type: string
     Creator:
       type: object
       properties:
@@ -184,25 +215,6 @@ components:
           type: array
           items:
             type: object
-    RecordSearchResult:
-      type: object
-      properties:
-        hits:
-          type: object
-          properties:
-            hits:
-              type: array
-              items:
-                $ref: '#/components/schemas/Record'
-            total:
-              type: integer
-        links:
-          type: object
-          additionalProperties:
-            type: string
-            format: uri
-        sortBy:
-          type: string
     PersistentIdentifiers:
       type: object
       description: DOI and OAI identifiers. CaltechDATA mints DOIs through DataCite under its own prefix 10.22002 — `pids.doi.provider` is observed as `datacite`.
@@ -233,18 +245,6 @@ components:
               type: string
               examples:
               - oai
-    Error:
-      type: object
-      description: Observed error body shape, verified on a 404.
-      properties:
-        status:
-          type: integer
-          examples:
-          - 404
-        message:
-          type: string
-          examples:
-          - The persistent identifier does not exist.
 x-operator: institution
 x-operator-rationale: 'Host data.caltech.edu is under the institution''s own registrable domain caltech.edu. The repository software is open source (InvenioRDM) and self-hosted by Caltech Library, not an account on a vendor''s shared platform. Compare a Figshare tenancy, which would be x-operator: tenant.'
 x-provenance:
