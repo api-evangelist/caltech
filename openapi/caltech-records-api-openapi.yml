@@ -89,78 +89,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Creator:
-      type: object
-      properties:
-        person_or_org:
-          type: object
-          properties:
-            type:
-              type: string
-              examples:
-              - personal
-            name:
-              type: string
-            given_name:
-              type: string
-            family_name:
-              type: string
-            identifiers:
-              type: array
-              description: 'Contributor identifiers. ORCID iDs are carried with `scheme: orcid`, observed live in CaltechDATA records.'
-              items:
-                type: object
-                properties:
-                  identifier:
-                    type: string
-                    examples:
-                    - 0000-0002-5590-9620
-                  scheme:
-                    type: string
-                    examples:
-                    - orcid
-        affiliations:
-          type: array
-          items:
-            type: object
-    RecordSearchResult:
-      type: object
-      properties:
-        hits:
-          type: object
-          properties:
-            hits:
-              type: array
-              items:
-                $ref: '#/components/schemas/Record'
-            total:
-              type: integer
-        links:
-          type: object
-          additionalProperties:
-            type: string
-            format: uri
-        sortBy:
-          type: string
-    RecordMetadata:
-      type: object
-      properties:
-        title:
-          type: string
-        publication_date:
-          type: string
-        resource_type:
-          type: object
-        description:
-          type: string
-        creators:
-          type: array
-          items:
-            $ref: '#/components/schemas/Creator'
-        rights:
-          type: array
-          items:
-            type: object
     Record:
       type: object
       description: A published CaltechDATA record, in InvenioRDM record shape.
@@ -203,6 +131,90 @@ components:
           type: object
           additionalProperties:
             type: string
+    RecordMetadata:
+      type: object
+      properties:
+        title:
+          type: string
+        publication_date:
+          type: string
+        resource_type:
+          type: object
+        description:
+          type: string
+        creators:
+          type: array
+          items:
+            $ref: '#/components/schemas/Creator'
+        rights:
+          type: array
+          items:
+            type: object
+    Error:
+      type: object
+      description: Observed error body shape, verified on a 404.
+      properties:
+        status:
+          type: integer
+          examples:
+          - 404
+        message:
+          type: string
+          examples:
+          - The persistent identifier does not exist.
+    RecordSearchResult:
+      type: object
+      properties:
+        hits:
+          type: object
+          properties:
+            hits:
+              type: array
+              items:
+                $ref: '#/components/schemas/Record'
+            total:
+              type: integer
+        links:
+          type: object
+          additionalProperties:
+            type: string
+            format: uri
+        sortBy:
+          type: string
+    Creator:
+      type: object
+      properties:
+        person_or_org:
+          type: object
+          properties:
+            type:
+              type: string
+              examples:
+              - personal
+            name:
+              type: string
+            given_name:
+              type: string
+            family_name:
+              type: string
+            identifiers:
+              type: array
+              description: 'Contributor identifiers. ORCID iDs are carried with `scheme: orcid`, observed live in CaltechDATA records.'
+              items:
+                type: object
+                properties:
+                  identifier:
+                    type: string
+                    examples:
+                    - 0000-0002-5590-9620
+                  scheme:
+                    type: string
+                    examples:
+                    - orcid
+        affiliations:
+          type: array
+          items:
+            type: object
     PersistentIdentifiers:
       type: object
       description: DOI and OAI identifiers. CaltechDATA mints DOIs through DataCite under its own prefix 10.22002 — `pids.doi.provider` is observed as `datacite`.
@@ -233,18 +245,6 @@ components:
               type: string
               examples:
               - oai
-    Error:
-      type: object
-      description: Observed error body shape, verified on a 404.
-      properties:
-        status:
-          type: integer
-          examples:
-          - 404
-        message:
-          type: string
-          examples:
-          - The persistent identifier does not exist.
 x-operator: institution
 x-operator-rationale: 'Host data.caltech.edu is under the institution''s own registrable domain caltech.edu. The repository software is open source (InvenioRDM) and self-hosted by Caltech Library, not an account on a vendor''s shared platform. Compare a Figshare tenancy, which would be x-operator: tenant.'
 x-provenance:
