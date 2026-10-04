@@ -89,6 +89,82 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Creator:
+      type: object
+      properties:
+        person_or_org:
+          type: object
+          properties:
+            type:
+              type: string
+              examples:
+              - personal
+            name:
+              type: string
+            given_name:
+              type: string
+            family_name:
+              type: string
+            identifiers:
+              type: array
+              description: 'Contributor identifiers. ORCID iDs are carried with `scheme: orcid`, observed live in CaltechDATA records.'
+              items:
+                type: object
+                properties:
+                  identifier:
+                    type: string
+                    examples:
+                    - 0000-0002-5590-9620
+                  scheme:
+                    type: string
+                    examples:
+                    - orcid
+        affiliations:
+          type: array
+          items:
+            type: object
+    Error:
+      type: object
+      description: Observed error body shape, verified on a 404.
+      properties:
+        status:
+          type: integer
+          examples:
+          - 404
+        message:
+          type: string
+          examples:
+          - The persistent identifier does not exist.
+    PersistentIdentifiers:
+      type: object
+      description: DOI and OAI identifiers. CaltechDATA mints DOIs through DataCite under its own prefix 10.22002 — `pids.doi.provider` is observed as `datacite`.
+      properties:
+        doi:
+          type: object
+          properties:
+            identifier:
+              type: string
+              examples:
+              - 10.22002/je5p4-zyb48
+            provider:
+              type: string
+              examples:
+              - datacite
+            client:
+              type: string
+              examples:
+              - datacite
+        oai:
+          type: object
+          properties:
+            identifier:
+              type: string
+              examples:
+              - oai:data.caltech.edu:je5p4-zyb48
+            provider:
+              type: string
+              examples:
+              - oai
     Record:
       type: object
       description: A published CaltechDATA record, in InvenioRDM record shape.
@@ -150,18 +226,6 @@ components:
           type: array
           items:
             type: object
-    Error:
-      type: object
-      description: Observed error body shape, verified on a 404.
-      properties:
-        status:
-          type: integer
-          examples:
-          - 404
-        message:
-          type: string
-          examples:
-          - The persistent identifier does not exist.
     RecordSearchResult:
       type: object
       properties:
@@ -181,70 +245,6 @@ components:
             format: uri
         sortBy:
           type: string
-    Creator:
-      type: object
-      properties:
-        person_or_org:
-          type: object
-          properties:
-            type:
-              type: string
-              examples:
-              - personal
-            name:
-              type: string
-            given_name:
-              type: string
-            family_name:
-              type: string
-            identifiers:
-              type: array
-              description: 'Contributor identifiers. ORCID iDs are carried with `scheme: orcid`, observed live in CaltechDATA records.'
-              items:
-                type: object
-                properties:
-                  identifier:
-                    type: string
-                    examples:
-                    - 0000-0002-5590-9620
-                  scheme:
-                    type: string
-                    examples:
-                    - orcid
-        affiliations:
-          type: array
-          items:
-            type: object
-    PersistentIdentifiers:
-      type: object
-      description: DOI and OAI identifiers. CaltechDATA mints DOIs through DataCite under its own prefix 10.22002 — `pids.doi.provider` is observed as `datacite`.
-      properties:
-        doi:
-          type: object
-          properties:
-            identifier:
-              type: string
-              examples:
-              - 10.22002/je5p4-zyb48
-            provider:
-              type: string
-              examples:
-              - datacite
-            client:
-              type: string
-              examples:
-              - datacite
-        oai:
-          type: object
-          properties:
-            identifier:
-              type: string
-              examples:
-              - oai:data.caltech.edu:je5p4-zyb48
-            provider:
-              type: string
-              examples:
-              - oai
 x-operator: institution
 x-operator-rationale: 'Host data.caltech.edu is under the institution''s own registrable domain caltech.edu. The repository software is open source (InvenioRDM) and self-hosted by Caltech Library, not an account on a vendor''s shared platform. Compare a Figshare tenancy, which would be x-operator: tenant.'
 x-provenance:
