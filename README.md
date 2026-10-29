@@ -1,4 +1,4 @@
-# California Institute of Technology (caltech)
+# California Institute of Technology
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,111 +64,143 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-The California Institute of Technology (Caltech) is a private research university in Pasadena, California. This repository catalogs Caltech's public, machine-readable footprint as an APIs.json profile, under the API Evangelist **university** pipeline — which settles **who operates each surface** before saving any contract.
+The California Institute of Technology (Caltech) is a private research university in Pasadena, California, and one of the rare institutions in this cohort whose machine-readable footprint is genuinely its own rather than a vendor's contract running under its name. Caltech operates no central developer portal — neither api.caltech.edu nor developer.caltech.edu resolves — and publishes no OpenAPI, no llms.txt, no .well-known catalog and no status page. What it does operate is real research infrastructure on its own domain, engineered by four independent units with no shared convention between them: Caltech Library runs CaltechDATA and CaltechAUTHORS on self-hosted InvenioRDM, with public REST APIs, OAI-PMH 2.0 endpoints and DataCite DOIs minted under Caltech's own 10.22002 prefix; the Seismological Laboratory runs the Southern California Earthquake Data Center's FDSN web services; Caltech/IPAC runs three NASA archives — IRSA, NED and the NASA Exoplanet Archive — behind IVOA Virtual Observatory interfaces; and IMSS runs a Shibboleth identity provider registered in the InCommon federation. Five of the twelve education-regime domain standards are evidenced directly inside live Caltech contracts: shibboleth, saml, oai-pmh, datacite and orcid. The library discovery layer is the one genuinely outsourced surface, a Springshare tenancy at libguides.caltech.edu. The honest summary is that Caltech ships excellent open research data and almost no API product management around it.
 
-Caltech is an outlier in the university cohort: its machine-readable surfaces are genuinely **its own**, self-hosted on `caltech.edu`, rather than a vendor's contract running under the institution's name. Nine of eleven catalogued surfaces are institution-operated. Two are vendor tenancies, recorded as relationships with no vendor specification saved here.
+**Areas:** University · Higher Education · Education · Private Research University · Institute of Technology · United States · California · Research Data · Open Data · Research Repository · Identity Federation · Astronomy
 
-There is no central developer portal — neither `api.caltech.edu` nor `developer.caltech.edu` resolves — and Caltech publishes no OpenAPI, `llms.txt`, `.well-known` catalog or status page for any surface.
+## California Institute of Technology on APIs.io
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/caltech/refs/heads/main/apis.yml
-- Naftiko Run: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=caltech-api-evangelist&utm_content=repo
+Everything profiled for California Institute of Technology is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/caltech/](https://apis.io/providers/caltech/)** — or go straight to one of the APIs or properties below.
 
-## Type
+### APIs (13)
 
-- University / Private Research University — Index / Consumer / 3rd-Party
+- [CaltechDATA OAI-PMH](https://apis.io/apis/caltech/caltechdata-oai/) — OAI-PMH 2.0 metadata harvesting endpoint for CaltechDATA. Verified live 2026-08-19 via the Identify verb (repositoryName CaltechDATA, protocolVersion 2.0)…
+- [CaltechAUTHORS REST API and OAI-PMH](https://apis.io/apis/caltech/caltechauthors/) — Caltech's institutional publications repository, also on self-hosted InvenioRDM. Exposes the same REST record API and an OAI-PMH 2.0 endpoint, carrying…
+- [Caltech Library Feeds](https://apis.io/apis/caltech/library-feeds/) — A metadata service built and operated by Caltech Library (v1.6), harvesting its institutional repositories, public directory and archival systems into…
+- [IRSA Virtual Observatory APIs (Caltech/IPAC)](https://apis.io/apis/caltech/irsa-vo/) — The NASA/IPAC Infrared Science Archive exposes IVOA-standard Virtual Observatory interfaces — Table Access Protocol (TAP/ADQL), Simple Cone Search and…
+- [NED Table Access Protocol (Caltech/IPAC)](https://apis.io/apis/caltech/ned-tap/) — The NASA/IPAC Extragalactic Database, operated by Caltech/IPAC, exposes an IVOA TAP service over its extragalactic object catalog. Verified live 2026-08-19…
+- [NASA Exoplanet Archive TAP (Caltech/IPAC)](https://apis.io/apis/caltech/exoplanet-archive-tap/) — The NASA Exoplanet Archive, operated by Caltech/IPAC, exposes an IVOA TAP service over its confirmed-planet and related tables. Verified live 2026-08-19…
+- [Caltech Shibboleth Identity Provider (InCommon)](https://apis.io/apis/caltech/identity-federation/) — Caltech operates its own Shibboleth identity provider at idp.caltech.edu, asserting scoped attributes for caltech.edu. The SAML 2.0 metadata is…
+- [Caltech Library Guides (Springshare tenancy)](https://apis.io/apis/caltech/libguides-springshare/) — Caltech Library's discovery and research-guide layer runs on Springshare LibGuides/LibApps rather than on institution-operated software. Recorded as a real…
+- [EBSCO Link Resolver (Caltech instance)](https://apis.io/apis/caltech/ebsco-resolver/) — Caltech Library's OpenURL link resolver is an EBSCO tenancy — instance `l7ubco` on the shared host resolver.ebsco.com — referenced from Caltech's own…
+- [California Institute of Technology Data Select API](https://apis.io/apis/caltech/caltech-dataselect-api/) — Time-series waveform retrieval (fdsnws-dataselect).
+- [California Institute of Technology Event API](https://apis.io/apis/caltech/caltech-event-api/) — Earthquake event catalog queries (fdsnws-event).
+- [California Institute of Technology Records API](https://apis.io/apis/caltech/caltech-records-api/) — Published research data records, their metadata, files and DOIs.
+- [California Institute of Technology Station API](https://apis.io/apis/caltech/caltech-station-api/) — Station and channel metadata queries (fdsnws-station).
 
-## Tags
+### Published properties
 
-- University
-- Higher Education
-- Education
-- Private Research University
-- Institute of Technology
-- United States
-- California
-- Research Data
-- Open Data
-- Research Repository
-- Identity Federation
-- Astronomy
-- Seismology
-- Research Computing
-- OAI-PMH
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Surfaces, by operator
+#### JSON Schema (2)
 
-Every surface carries an `x-operator` in `apis.yml`. `institution` means Caltech runs the thing the contract describes; `tenant` means the data is Caltech's and the contract is a vendor's.
+The data models the API reads and writes.
 
-### Institution-operated (9)
+- [CaltechDATA Record](https://apis.io/schemas/caltech/caltech-caltechdata-record/)
+- [Caltech Library Feeds — Person](https://apis.io/schemas/caltech/caltech-library-feeds-person/)
 
-- **CaltechDATA REST API** — Research data repository on self-hosted InvenioRDM. DataCite DOIs under Caltech's own `10.22002` prefix; ORCID iDs on creators. Base: https://data.caltech.edu/api/records
-- **CaltechDATA OAI-PMH** — OAI-PMH 2.0 harvesting, advertising `datacite`, `datacite4`, `dcat`, `marc21`, `oai_dc`. Base: https://data.caltech.edu/oai2d
-- **CaltechAUTHORS REST API and OAI-PMH** — Publications repository on self-hosted InvenioRDM, carrying ORCID and ROR identifiers. Base: https://authors.library.caltech.edu/api/records
-- **Caltech Library Feeds** — Library-built metadata service publishing JSON datasets from its repositories, directory and archives, on its own `irdmtools` toolchain. Base: https://feeds.library.caltech.edu/
-- **SCEDC FDSN Web Services** — Southern California Earthquake Data Center, Caltech Seismological Laboratory. `fdsnws-event`, `fdsnws-station`, `fdsnws-dataselect`. Base: https://service.scedc.caltech.edu/fdsnws
-- **IRSA Virtual Observatory APIs (Caltech/IPAC)** — NASA/IPAC Infrared Science Archive: IVOA TAP, Simple Cone Search, Simple Image Access v2. Base: https://irsa.ipac.caltech.edu/TAP
-- **NED Table Access Protocol (Caltech/IPAC)** — NASA/IPAC Extragalactic Database IVOA TAP. Base: https://ned.ipac.caltech.edu/tap
-- **NASA Exoplanet Archive TAP (Caltech/IPAC)** — IVOA TAP over confirmed-planet tables. Base: https://exoplanetarchive.ipac.caltech.edu/TAP
-- **Caltech Shibboleth Identity Provider (InCommon)** — SAML 2.0 / Shibboleth IdP, scope `caltech.edu`, registered in InCommon and reachable through eduGAIN. Base: https://idp.caltech.edu/idp/shibboleth
+#### JSON-LD (1)
 
-### Vendor tenancies (2) — relationship recorded, no vendor contract saved
+Linked-data contexts for the provider's vocabulary.
 
-- **Caltech Library Guides** — Springshare LibGuides tenancy at https://libguides.caltech.edu/ (site_id 64). Springshare's generic API at `lgapi-us.libapps.com` is **not** saved under Caltech.
-- **EBSCO Link Resolver** — EBSCO tenancy (instance `l7ubco`) on a shared vendor host.
+- [Caltech Context](https://apis.io/jsonld/caltech/caltech-context/)
 
-## Domain standards (Kin Score `education` regime)
+#### Examples (1)
 
-Five of twelve confirmed, each evidenced inside a live contract or response body rather than a prose claim — see [conformance/caltech-education-standards.yml](conformance/caltech-education-standards.yml).
+Example requests and responses.
 
-| Standard | Status | Evidence |
-|---|---|---|
-| `shibboleth` | conformant | `IDPSSODescriptor/@protocolSupportEnumeration` includes `urn:mace:shibboleth:1.0` |
-| `saml` | conformant | InCommon-signed metadata, `registrationAuthority` = `https://incommon.org` |
-| `oai-pmh` | conformant | `Identify/protocolVersion` = `2.0` on two endpoints |
-| `datacite` | conformant | `pids.doi.provider` = `datacite`, Caltech prefix `10.22002` |
-| `orcid` | conformant | `creators[].person_or_org.identifiers[].scheme` = `orcid` |
-| `crossref`, `scim`, `lti`, `oneroster`, `ed-fi`, `caliper`, `qti` | not found | probed; recorded as absences |
+- [Caltech Caltechdata Record Example](https://apis.io/examples/caltech/caltech-caltechdata-record-example/)
 
-## Artifacts
+#### Governance rules (1)
 
-- OpenAPI (derived, marked `method: derived` — Caltech publishes none): [openapi/](openapi/) with pristine pre-refine copies in [openapi/_original/](openapi/_original/)
-- JSON Schema: [json-schema/](json-schema/)
-- Examples (verbatim captured responses): [examples/](examples/)
-- Conformance: [conformance/caltech-education-standards.yml](conformance/caltech-education-standards.yml)
-- Authentication: [authentication/caltech-authentication.yml](authentication/caltech-authentication.yml)
-- Errors: [errors/caltech-errors.yml](errors/caltech-errors.yml)
-- Lifecycle: [lifecycle/caltech-lifecycle.yml](lifecycle/caltech-lifecycle.yml)
-- Vocabulary: [vocabulary/caltech-vocabulary.yml](vocabulary/caltech-vocabulary.yml)
-- Governance observations: [rules/caltech-rules.yml](rules/caltech-rules.yml)
-- JSON-LD: [json-ld/caltech-context.jsonld](json-ld/caltech-context.jsonld)
-- Plans / Rate Limits / FinOps: [plans/](plans/caltech-plans-pricing.yml) · [rate-limits/](rate-limits/caltech-rate-limits.yml) · [finops/](finops/caltech-finops.yml)
+Spectral rulesets for the provider's contracts.
 
-## Timestamps
+- [California Institute of Technology API Rules](https://apis.io/rules/caltech/caltech-rules/)
 
-- Created: 2026-06-03
-- Modified: 2026-08-19
+#### Security (2)
 
-## Common Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- Website: https://www.caltech.edu/
-- Privacy Notice: https://www.caltech.edu/privacy-notice
-- GitHub: https://github.com/caltechlibrary · https://github.com/Caltech-IPAC
-- Open Data / Research Repository: https://data.caltech.edu/ · https://authors.library.caltech.edu/
-- Identity Federation: https://mdq.incommon.org/entities/https%3A%2F%2Fidp.caltech.edu%2Fidp%2Fshibboleth
-- Course Catalog: https://catalog.caltech.edu/
-- Research Computing: https://hpc.caltech.edu/
-- AI Policy: https://www.imss.caltech.edu/services/ai
-- LinkedIn: https://www.linkedin.com/school/california-institute-of-technology/
-- Review: [review.yml](review.yml)
+- [Caltech Authentication](https://apis.io/security/caltech/caltech-authentication/)
+- [Caltech Domain Security](https://apis.io/security/caltech/caltech-domain-security/)
 
-## Notes
+#### Plans and pricing (1)
 
-- Every surface was live-verified on 2026-08-19 with a **real query**, not a link check: SCEDC returned actual catalog earthquakes, the IVOA TAP services returned actual rows, and the OAI-PMH endpoints answered the `Identify` verb. No endpoints were fabricated.
-- Both OpenAPI documents here are **derived by API Evangelist from live probes** and marked `method: derived`. Caltech publishes no OpenAPI. The only machine-readable service description Caltech itself publishes is a WADL for `fdsnws-dataselect`.
-- The `caltech` GitHub org self-identifies as an unofficial community group and is **not** claimed as an institutional property; the substantive code lives under `caltechlibrary` and `Caltech-IPAC`.
-- `authors.library.caltech.edu` was previously excluded after an HTTP 522. It verified **200** on 2026-08-19 and is now catalogued — but 522s were still observed between successful calls, and Caltech publishes no status page on which a consumer could confirm that as an incident.
-- Bot-blocking is recorded as a finding, not a gap: `scedc.caltech.edu` documentation returns 403 to non-browser clients while its data services return 200, and `www.caltech.edu/about/news` returns 403 while its Atom feed returns 200.
+Published plans, tiers and prices.
 
-## Maintainers
+- [Caltech Plans Pricing](https://apis.io/plans/caltech/caltech-plans-pricing/)
 
-- Kin Lane — kin@apievangelist.com
+#### Rate limits (1)
+
+Published request limits.
+
+- [Caltech Rate Limits](https://apis.io/rate-limits/caltech/caltech-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Caltech Finops](https://apis.io/finops/caltech/caltech-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.caltech.edu/)
+- [Support](https://library.caltech.edu/)
+- [Blog](https://www.caltech.edu/about/news)
+- [Privacy policy](https://www.caltech.edu/privacy-notice)
+- [GitHub](https://github.com/caltechlibrary)
+
+## API Evangelist rating
+
+**Kin Score 22.9** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 23.9 |
+| Contract governance | 3.8 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 15.8 |
+
+**Agent readiness 21.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.6** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/caltech/](https://apis.io/providers/caltech/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for California Institute of Technology: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/caltech/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
